@@ -1,5 +1,9 @@
-import React from "react";
+import TransitionEffect from "@/components/TransitionEffect";
 
 export default function Contact() {
-  return <div>contact</div>;
+  return (
+    <>
+      <TransitionEffect />
+    </>
+  );
 }

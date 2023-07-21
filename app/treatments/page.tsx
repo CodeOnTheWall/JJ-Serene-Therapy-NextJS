@@ -1,5 +1,9 @@
-import React from "react";
+import TransitionEffect from "@/components/TransitionEffect";
 
 export default function Treatments() {
-  return <div>about</div>;
+  return (
+    <>
+      <TransitionEffect />
+    </>
+  );
 }

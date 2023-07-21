@@ -5,7 +5,7 @@ import HamburgerNav from "./HamburgerNav";
 
 export default function NavBar() {
   return (
-    <div className=" border-b-2 border-purple-700 bg-purple-300">
+    <div className=" border-b-2 border-[#7209b7] bg-purple-300">
       <div className="flex h-16 items-center px-4">
         <MainNav />
         <HamburgerIcon />

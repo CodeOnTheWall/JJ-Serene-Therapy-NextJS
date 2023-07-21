@@ -1,5 +1,9 @@
-import React from "react";
+import TransitionEffect from "@/components/TransitionEffect";
 
 export default function Background() {
-  return <div>background</div>;
+  return (
+    <>
+      <TransitionEffect />
+    </>
+  );
 }

@@ -13,7 +13,7 @@ const quote = {
     opacity: 1,
     transition: {
       staggerChildren: 0.08,
-      delayChildren: 0.5,
+      delayChildren: 0.6,
     },
   },
 };
@@ -44,8 +44,8 @@ export default function AnimatedText({ text, className }: AnimatedTextProps) {
      sm:p-0"
     >
       <motion.h1
-        className={`${className} w-full title font-bold capitalize text-8xl text-black/90
-        lg:text-6xl md:text-5xl `}
+        className={`${className} w-full title font-bold capitalize text-4xl md:text-6xl text-black/90
+      `}
         // telling the variants to use initial from quote, and animate from quote
         variants={quote}
         initial="initial"
@@ -54,7 +54,7 @@ export default function AnimatedText({ text, className }: AnimatedTextProps) {
         {text.split(" ").map((word, index) => (
           <motion.span
             key={word + "-" + index}
-            className=" inline-block "
+            className={`inline-block ${className}`}
             variants={singleWord}
             // bg-gradient-to-l bg-purple-200 via-purple-700 to-purple-200 text-transparent bg-clip-text animate-gradient-x
           >
