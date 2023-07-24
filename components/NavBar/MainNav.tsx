@@ -16,6 +16,7 @@ export default function MainNav({ className, ...props }: MainNavProps) {
       <CustomLink href="/treatments" title="Treatments" />
       <CustomLink href="/background" title="Background" />
       <CustomLink href="/contact" title="Contact" />
+      <CustomLink href="/booknow" title="Book Now" />
     </nav>
   );
 }

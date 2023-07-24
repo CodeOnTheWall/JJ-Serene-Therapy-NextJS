@@ -23,8 +23,9 @@ export default function page() {
     <>
       <TransitionEffect />
       <Layout className=" flex-col items-center justify-evenly text-dark">
-        <div className="flex flex-col md:flex-row  items-center">
+        <div className="flex flex-col md:flex-row items-center">
           <MotionDiv
+            delay={0.6}
             x={25}
             y={25}
             duration={1.2}
@@ -41,6 +42,7 @@ export default function page() {
             THERAPY
           </MotionTitle>
           <MotionDiv
+            delay={0.6}
             x={-25}
             y={-25}
             duration={1.2}

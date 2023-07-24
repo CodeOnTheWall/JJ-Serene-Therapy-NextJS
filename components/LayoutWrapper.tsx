@@ -8,7 +8,7 @@ interface LayoutProps {
 export default function Layout({ children, className }: LayoutProps) {
   return (
     <main
-      className={`${className}  flex h-full w-full p-32 md:p-24 lg:p-16 sm:p-12`}
+      className={`${className}  flex w-full min-h-screen p-12 md:p-16 lg:p-24`}
     >
       {children}
     </main>
