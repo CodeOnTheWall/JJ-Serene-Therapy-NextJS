@@ -5,9 +5,8 @@ import Layout from "@/components/LayoutWrapper";
 import MotionDiv from "@/components/Motion/MotionDiv";
 import MotionTitle from "@/components/Motion/MotionTitle";
 
-// NextJS
-import Image from "next/image";
-import Link from "next/link";
+// Page Specific Components
+import ContactForm from "./(components)/ContactForm";
 
 // Metadata
 export const metadata = {
@@ -59,6 +58,9 @@ export default function page() {
             useAnimate={false}
             className="bg-[#7209b7] md:w-[2px] md:h-[32px]"
           />
+        </div>
+        <div>
+          <ContactForm />
         </div>
       </Layout>
     </>

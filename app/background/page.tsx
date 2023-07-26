@@ -37,7 +37,7 @@ export default function page() {
   return (
     <>
       <TransitionEffect />
-      <Layout className=" flex-col items-center justify-start space-y-10 text-dark">
+      <Layout className=" flex-col items-center justify-start space-y-20 text-dark">
         <div className="flex flex-col md:flex-row items-center">
           <MotionDiv
             delay={0.6}
@@ -48,7 +48,7 @@ export default function page() {
             className="bg-[#7209b7] md:w-[2px] md:h-[32px] mr-[15px]"
           />
 
-          <MotionTitle y={-50} duration={1.2} delay={0.6}>
+          <MotionTitle duration={1.2} delay={0.6}>
             MY
           </MotionTitle>
           <MotionTitle y={50} duration={1.2} delay={0.6}>
@@ -68,7 +68,7 @@ export default function page() {
             <TypeWriter />
           </h1>
         </div>
-        <div>
+        <div className=" space-y-6">
           <MotionTitle
             rotatey={90}
             delay={0.6}
