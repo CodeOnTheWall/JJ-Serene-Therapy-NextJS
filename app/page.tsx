@@ -23,7 +23,7 @@ export default function page() {
     <>
       <TransitionEffect />
       <Layout className=" flex-col items-center justify-evenly text-dark">
-        <div className="flex flex-col md:flex-row items-center">
+        <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0">
           <MotionDiv
             delay={0.6}
             x={25}
@@ -50,10 +50,7 @@ export default function page() {
             className="bg-[#7209b7] md:w-[2px] md:h-[32px]"
           />
         </div>
-        {/* <AnimatedText
-          text="JJ Serene Therapy"
-          className=" underline decoration-purple-700 decoration-2 first-letter:text-purple-700"
-        /> */}
+
         <div className="flex justify-evenly">
           <div className=" w-1/3 hidden lg:inline-block">
             <Image

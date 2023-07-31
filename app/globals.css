@@ -23,6 +23,11 @@
   transition: 0.3s, background-size 0.3s 0.3s;
 }
 
+.map-container {
+  width: 100%;
+  height: 100vh;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -43,11 +43,11 @@ export default function page() {
             x={25}
             y={25}
             duration={1.2}
-            useAnimate={false}
+            useAnimate={true}
             className="bg-[#7209b7] md:w-[2px] md:h-[32px] mr-[15px]"
           />
 
-          <MotionTitle y={-50} duration={1.2} delay={0.6}>
+          <MotionTitle y={-50} duration={1.2} delay={0.6} useAnimate={true}>
             TREATMENTS
           </MotionTitle>
           <MotionDiv
@@ -65,6 +65,7 @@ export default function page() {
             duration={1.2}
             delay={0.8}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Headaches and Migraines
           </MotionTitle>
@@ -73,6 +74,7 @@ export default function page() {
             duration={1.2}
             delay={0.9}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Neck pain
           </MotionTitle>
@@ -81,6 +83,7 @@ export default function page() {
             duration={1.2}
             delay={1}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Shoulders problem (frozen shoulder...)
           </MotionTitle>
@@ -89,6 +92,7 @@ export default function page() {
             duration={1.2}
             delay={1.1}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Back pain
           </MotionTitle>
@@ -97,6 +101,7 @@ export default function page() {
             duration={1.2}
             delay={1.2}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Abdominal pain
           </MotionTitle>
@@ -105,6 +110,7 @@ export default function page() {
             duration={1.2}
             delay={1.3}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             SI joint dysfunction
           </MotionTitle>
@@ -113,6 +119,7 @@ export default function page() {
             duration={1.2}
             delay={1.4}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Hips problems
           </MotionTitle>
@@ -121,6 +128,7 @@ export default function page() {
             duration={1.2}
             delay={1.5}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Legs pain
           </MotionTitle>
@@ -129,6 +137,7 @@ export default function page() {
             duration={1.2}
             delay={1.6}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Knees and Ankles pain
           </MotionTitle>
@@ -137,6 +146,7 @@ export default function page() {
             duration={1.2}
             delay={1.7}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Sciatica
           </MotionTitle>
@@ -145,6 +155,7 @@ export default function page() {
             duration={1.2}
             delay={1.8}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Arms and hands problems
           </MotionTitle>
@@ -153,6 +164,7 @@ export default function page() {
             duration={1.2}
             delay={1.9}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Fibromyalgia
           </MotionTitle>
@@ -161,6 +173,7 @@ export default function page() {
             duration={1.2}
             delay={2}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={true}
           >
             Plantar Fasciitis
           </MotionTitle>

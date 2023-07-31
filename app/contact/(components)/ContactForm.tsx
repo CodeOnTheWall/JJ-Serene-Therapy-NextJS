@@ -29,9 +29,16 @@ const contactFormSchema = z.object({
   lastName: z.string().min(1, {
     message: "Last Name must be at least 2 characters",
   }),
-  phoneNumber: z.number().min(10, {
+  phoneNumber: z.string().min(10, {
     message: "Phone number must be at least 10 digits",
   }),
+  subject: z.string().min(1, {
+    message: "Subject must not be empty",
+  }),
+  message: z.string().min(1, {
+    message: "Message must not be empty",
+  }),
+  email: z.string().email(),
 });
 // z.infer is used to extract the type info from a zod schema
 // and the type to be extracted is typeof formSchema
@@ -52,18 +59,26 @@ export default function ContactForm() {
       firstName: "",
       lastName: "",
       phoneNumber: "",
+      email: "",
+      subject: "",
+      message: "",
     },
   });
 
   // 2. Define Submit Handler
   const onSubmit = async (values: ContactFormSchema) => {
     try {
+      window.location.href = `mailto:jjserenetherapy@hotmail.com?subject=${values.subject}
+      &body=Hi, my name is ${values.firstName} ${values.lastName}. ${values.message}. I can be reached at ${values.phoneNumber} or ${values.email}`;
       setIsLoading(true);
 
       const response = await fetch("/api/clients", {
         method: "POST",
         body: JSON.stringify({
           firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          phoneNumber: values.phoneNumber,
         }),
       });
 
@@ -81,75 +96,134 @@ export default function ContactForm() {
   };
 
   return (
-    <Form {...contactForm}>
-      <form onSubmit={contactForm.handleSubmit(onSubmit)}>
-        <FormField
-          control={contactForm.control}
-          name="firstName"
-          // ctrl click to see the field prop from react-hook-form
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>First Name</FormLabel>
-              <FormControl>
-                <Input
-                  // disabled if loading
-                  disabled={isloading}
-                  placeholder="Steve"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={contactForm.control}
-          name="lastName"
-          // ctrl click to see the field prop from react-hook-form
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Last Name</FormLabel>
-              <FormControl>
-                <Input
-                  // disabled if loading
-                  disabled={isloading}
-                  placeholder="Carell"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={contactForm.control}
-          name="phoneNumber"
-          // ctrl click to see the field prop from react-hook-form
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone Number</FormLabel>
-              <FormControl>
-                <Input
-                  // disabled if loading
-                  disabled={isloading}
-                  placeholder="7802225555"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className=" pt-6 space-x-2 flex items-center justify-end w-full">
+    <>
+      <Form {...contactForm}>
+        <form
+          onSubmit={contactForm.handleSubmit(onSubmit)}
+          className=" space-y-2 w-full md:w-1/2"
+        >
+          <FormField
+            control={contactForm.control}
+            name="firstName"
+            // ctrl click to see the field prop from react-hook-form
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Name</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="Steve"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={contactForm.control}
+            name="lastName"
+            // ctrl click to see the field prop from react-hook-form
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="Carell"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={contactForm.control}
+            name="phoneNumber"
+            // ctrl click to see the field prop from react-hook-form
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="7802225555"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={contactForm.control}
+            name="email"
+            // ctrl click to see the field prop from react-hook-form
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="JimHalpert@gmail.com"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={contactForm.control}
+            name="subject"
+            // ctrl click to see the field prop from react-hook-form
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="Shoulder"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={contactForm.control}
+            name="message"
+            // ctrl click to see the field prop from react-hook-form
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="I hurt my shoulder during exercise"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
           {/* disable buttons if loading */}
-          <Button disabled={isloading} variant="outline">
-            Cancel
-          </Button>
-          <Button disabled={isloading} type="submit">
-            Continue
-          </Button>
-        </div>
-      </form>
-    </Form>
+          <div className=" flex justify-center !mt-4">
+            <Button disabled={isloading} type="submit">
+              Continue
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </>
   );
 }

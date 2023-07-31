@@ -1,5 +1,4 @@
 // Components
-import AnimatedText from "@/components/AnimatedText";
 import TransitionEffect from "@/components/TransitionEffect";
 import Layout from "@/components/LayoutWrapper";
 import MotionDiv from "@/components/Motion/MotionDiv";
@@ -7,29 +6,13 @@ import MotionTitle from "@/components/Motion/MotionTitle";
 
 // Page Specific Components
 import ContactForm from "./(components)/ContactForm";
+import ContactInformation from "./(components)/ContactInformation";
 
 // Metadata
 export const metadata = {
-  title: "Treatments",
-  description: "Treatments available",
+  title: "Contact",
+  description: "JJ Serene Therapy Contact Information",
 };
-
-// Treatments Array
-const treatments = [
-  "Headaches and Migraines",
-  "Neck pain",
-  "Shoulders problem (frozen shoulder...)",
-  "Back pain",
-  "Abdominal pain",
-  "SI joint dysfunction",
-  "Hips problems",
-  "Legs pain",
-  "Knees and Ankles pain",
-  "Sciatica",
-  "Arms and hands problems",
-  "Fibromyalgia",
-  "Plantar Fasciitis",
-];
 
 export default function page() {
   return (
@@ -46,7 +29,7 @@ export default function page() {
             className="bg-[#7209b7] md:w-[2px] md:h-[32px] mr-[15px]"
           />
 
-          <MotionTitle y={-50} duration={1.2} delay={0.6}>
+          <MotionTitle y={-50} duration={1.2} delay={0.6} useAnimate={true}>
             CONTACT
           </MotionTitle>
 
@@ -59,8 +42,9 @@ export default function page() {
             className="bg-[#7209b7] md:w-[2px] md:h-[32px]"
           />
         </div>
-        <div>
+        <div className=" space-y-6 md:w-full md:flex md:justify-evenly md:items-center">
           <ContactForm />
+          <ContactInformation />
         </div>
       </Layout>
     </>

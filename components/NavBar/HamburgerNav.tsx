@@ -2,7 +2,7 @@
 
 import { useHamburgerState } from "@/hooks/useHamburgerState";
 
-import MotionDiv from "../MotionDiv";
+import MotionDiv from "../MotionDivTwo";
 import MobileCustomLink from "./MobileCustomLink";
 
 export default function HamburgerNav() {

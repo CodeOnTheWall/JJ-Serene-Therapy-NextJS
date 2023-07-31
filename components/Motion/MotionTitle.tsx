@@ -9,11 +9,7 @@ interface MotionTitleProps extends MotionProps {
   delay: number;
   className?: string;
   children: string;
-  rotate?: number;
-  rotateX?: number;
-  rotateY?: number;
-  rotateZ?: number;
-  skewY?: number;
+  useAnimate: boolean;
 }
 
 export default function MotionTitle({
@@ -23,31 +19,20 @@ export default function MotionTitle({
   delay,
   className,
   children,
-  rotate,
-  rotateX,
-  rotateY,
-  rotateZ,
-  skewY,
+  useAnimate,
 }: MotionTitleProps) {
+  const animationProps = useAnimate
+    ? { animate: { x: 0, y: 0, opacity: 1 } }
+    : { whileInView: { x: 0, y: 0, opacity: 1 } };
+
   return (
     <motion.h1
       initial={{
         x: x,
         y: y,
         opacity: 0,
-        rotate: rotate,
-        rotateY: rotateY,
-        rotateX: rotateX,
-        skewY: skewY,
       }}
-      whileInView={{
-        x: 0,
-        y: 0,
-        opacity: 1,
-        rotate: 0,
-        rotateY: 0,
-        rotateX: 0,
-      }}
+      {...animationProps}
       transition={{
         duration: duration,
         delay: delay,

@@ -4,7 +4,7 @@ interface BackgroundProps {
 
 export default function BG({ children }: BackgroundProps) {
   return (
-    <div className=" h-full bg-gradient-to-r from-purple-500 via-purple-100 bg-purple-400 animate-gradient-xy">
+    <div className=" min-h-screen bg-gradient-to-r from-purple-400 via-purple-100 bg-purple-300 animate-gradient-xy">
       {children}
     </div>
   );

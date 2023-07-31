@@ -1,4 +1,4 @@
-import MotionDiv from "./MotionDiv";
+import MotionDiv from "./MotionDivTwo";
 
 export default function TransitionEffect() {
   return (

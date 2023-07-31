@@ -12,26 +12,9 @@ import TypeWriter from "@/components/TypeWriter";
 
 // Metadata
 export const metadata = {
-  title: "Treatments",
-  description: "Treatments available",
+  title: "Background",
+  description: "Jason Khaled Background",
 };
-
-// Treatments Array
-const treatments = [
-  "Headaches and Migraines",
-  "Neck pain",
-  "Shoulders problem (frozen shoulder...)",
-  "Back pain",
-  "Abdominal pain",
-  "SI joint dysfunction",
-  "Hips problems",
-  "Legs pain",
-  "Knees and Ankles pain",
-  "Sciatica",
-  "Arms and hands problems",
-  "Fibromyalgia",
-  "Plantar Fasciitis",
-];
 
 export default function page() {
   return (
@@ -48,7 +31,7 @@ export default function page() {
             className="bg-[#7209b7] md:w-[2px] md:h-[32px] mr-[15px]"
           />
 
-          <MotionTitle duration={1.2} delay={0.6}>
+          <MotionTitle y={-50} duration={1.2} delay={0.6}>
             MY
           </MotionTitle>
           <MotionTitle y={50} duration={1.2} delay={0.6}>
@@ -70,17 +53,24 @@ export default function page() {
         </div>
         <div className=" space-y-6">
           <MotionTitle
-            rotatey={90}
             delay={0.6}
             duration={1.2}
             className="!text-2xl !tracking-[10px] !text-black"
           >
             Manual Osteopathic Therapist (MOT)
           </MotionTitle>
-          <MotionTitle className="!text-2xl !tracking-[10px] !text-black">
+          <MotionTitle
+            delay={0.6}
+            duration={1.2}
+            className="!text-2xl !tracking-[10px] !text-black"
+          >
             Registered Massage Therapist
           </MotionTitle>
-          <MotionTitle className="!text-2xl !tracking-[10px] !text-black">
+          <MotionTitle
+            delay={0.6}
+            duration={1.2}
+            className="!text-2xl !tracking-[10px] !text-black"
+          >
             BS in Biochemistry
           </MotionTitle>
         </div>
