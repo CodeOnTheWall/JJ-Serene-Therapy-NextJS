@@ -68,27 +68,27 @@ export default function ContactForm() {
   // 2. Define Submit Handler
   const onSubmit = async (values: ContactFormSchema) => {
     try {
+      setIsLoading(true);
+      toast.success("Email opening up...", {
+        duration: 4000,
+      });
+
       window.location.href = `mailto:jjserenetherapy@hotmail.com?subject=${values.subject}
       &body=Hi, my name is ${values.firstName} ${values.lastName}. ${values.message}. I can be reached at ${values.phoneNumber} or ${values.email}`;
-      setIsLoading(true);
 
-      const response = await fetch("/api/clients", {
+      await fetch("/api/clients", {
         method: "POST",
         body: JSON.stringify({
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
           phoneNumber: values.phoneNumber,
+          subject: values.subject,
+          message: values.message,
         }),
       });
-
-      const responseData = await response.json();
-      // toast.success(`E-commerce store ${responseData.name} created`);
-      // router.push(`/${responseData.id}`);
-      // other method that has less bugs since it causes a full page reload
-      // with method below, the modal goes away
-      window.location.assign(`/${responseData.id}`);
     } catch (error) {
+      console.log("here", error);
       toast.error(`Something went wrong, error: ${error}`);
     } finally {
       setIsLoading(false);
