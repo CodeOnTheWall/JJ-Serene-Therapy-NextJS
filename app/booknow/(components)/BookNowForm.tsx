@@ -8,7 +8,7 @@ import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { toast } from "react-hot-toast";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
@@ -37,6 +37,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { Textarea } from "@/components/ui/textarea";
+import MotionTitle from "@/components/Motion/MotionTitle";
 
 // zod schemas
 const bookNowFormSchema = z.object({
@@ -48,10 +50,10 @@ const bookNowFormSchema = z.object({
   lastName: z.string().min(1, {
     message: "Last Name must be at least 2 characters",
   }),
+  email: z.string().email(),
   phoneNumber: z.string().min(10, {
     message: "Phone number must be at least 10 digits",
   }),
-  email: z.string().email(),
   address: z.string().min(5, {
     message: "Address must be at least 5 characters",
   }),
@@ -63,6 +65,9 @@ const bookNowFormSchema = z.object({
   }),
   dateOfBirth: z.date({
     required_error: "A date of birth is required.",
+  }),
+  personalHealthNumber: z.string().min(5, {
+    message: "Personal Health Number must be at least 5 characters",
   }),
   guardian: z.string().min(2, {
     message: "Guardian must be at least 2 characters",
@@ -80,7 +85,7 @@ const bookNowFormSchema = z.object({
     message: "Family doctor must be at least 2 characters",
   }),
   referringProfessional: z.string().min(2, {
-    message: "Referring professional must be at least 2 characters",
+    message: "Please put NA if not applicable",
   }),
   howDidYouHearAboutUs: z.string().min(2, {
     message: "How did you hear about us must be at least 2 characters",
@@ -88,28 +93,93 @@ const bookNowFormSchema = z.object({
   referredTo: z.string().min(2, {
     message: "Referred to must be at least 2 characters",
   }),
-  dateAddedByClient: z.date().min(new Date(1900, 0, 1), {
-    message: "Invalid date added by client",
-  }),
-  healthConcerns: z.string().min(2, {
-    message: "Health concerns must be at least 2 characters",
-  }),
-  whatIsMakingItBetter: z.string().min(2, {
-    message: "What is making it better must be at least 2 characters",
-  }),
-  whatIsMakingItWorse: z.string().min(2, {
-    message: "What is making it worse must be at least 2 characters",
-  }),
-  currentMedications: z.array(
-    z.object({
-      medication: z.string().min(2, {
-        message: "Medication must be at least 2 characters",
-      }),
-      conditionsTreated: z.string().min(2, {
-        message: "Conditions treated must be at least 2 characters",
-      }),
+  healthConcerns: z
+    .string()
+    .min(10, {
+      message: "Health concerns must be at least 10 characters.",
     })
-  ),
+    .max(160, {
+      message: "Health concerns must not be longer than 150 characters.",
+    }),
+  whatIsMakingItBetter: z
+    .string()
+    .min(2, {
+      message: "What is making it better must be at least 2 characters.",
+    })
+    .max(160, {
+      message:
+        "What is making it better must not be longer than 150 characters.",
+    }),
+  whatIsMakingItWorse: z
+    .string()
+    .min(2, {
+      message: "What is making it worse must be at least 2 characters.",
+    })
+    .max(160, {
+      message:
+        "What is making it worse must not be longer than 150 characters.",
+    }),
+  currentMedications: z
+    .string()
+    .min(2, {
+      message: "Please put NA if not applicable",
+    })
+    .max(160, {
+      message:
+        "Current medications and conditions treated must not be longer than 150 characters.",
+    }),
+  knownAllergiesOrHypersensitivities: z
+    .string()
+    .min(2, {
+      message: "Please put NA if not applicable",
+    })
+    .max(160, {
+      message:
+        "Known allergies or hypersensitivies must not be longer than 150 characters.",
+    }),
+  majorAccidentsOrSurgeries: z
+    .string()
+    .min(2, {
+      message: "Please put NA if not applicable",
+    })
+    .max(160, {
+      message:
+        "Major accidents or surgeries must not be longer than 150 characters.",
+    }),
+  familyHistory: z
+    .string()
+    .min(2, {
+      message: "Please put NA if not applicable",
+    })
+    .max(160, {
+      message: "Family history must not be longer than 150 characters.",
+    }),
+  activitiesSportsHobbies: z
+    .string()
+    .min(2, {
+      message: "Please put NA if not applicable",
+    })
+    .max(160, {
+      message:
+        "Activities/sports/hobbies must not be longer than 150 characters.",
+    }),
+  treatmentExpectation: z
+    .string()
+    .min(2, {
+      message: "Treatment expecation must be longer than 2 characters",
+    })
+    .max(160, {
+      message: "Treatment expecation must not be longer than 150 characters.",
+    }),
+  otherTherapyTreatment: z
+    .string()
+    .min(2, {
+      message: "Please put NA if not applicable",
+    })
+    .max(160, {
+      message:
+        "Other therapy treatments must not be longer than 150 characters.",
+    }),
 });
 // z.infer is used to extract the type info from a zod schema
 // and the type to be extracted is typeof formSchema
@@ -118,9 +188,7 @@ type BookNowFormSchema = z.infer<typeof bookNowFormSchema>;
 
 export default function BookNowForm() {
   const [isloading, setIsLoading] = useState(false);
-  const [currentMedications, setCurrentMedications] = useState([
-    { medication: "", conditionsTreated: "" },
-  ]);
+
   // 1. Define Form
   // methods on form i.e. form.handleSubmit are from the react-hook-form lib
   // all this is directly from shadcn form docs
@@ -134,9 +202,98 @@ export default function BookNowForm() {
       phoneNumber: "",
       email: "",
       address: "",
-      currentMedications: [{ medication: "", conditionsTreated: "" }],
+      personalHealthNumber: "",
+      guardian: "",
+      emergencyContact: "",
+      occupation: "",
+      employer: "",
+      familyDoctor: "",
+      referringProfessional: "",
+      howDidYouHearAboutUs: "",
+      referredTo: "",
+      healthConcerns: "",
+      whatIsMakingItBetter: "",
+      whatIsMakingItWorse: "",
+      currentMedications: "",
+      knownAllergiesOrHypersensitivities: "",
+      majorAccidentsOrSurgeries: "",
+      familyHistory: "",
+      activitiesSportsHobbies: "",
+      treatmentExpectation: "",
+      otherTherapyTreatment: "",
     },
   });
+
+  const cardiovascular = [
+    "High blood pressure",
+    "Low blood pressure",
+    "Chronic congestive heart failure",
+    "Heart attack",
+    "Stroke",
+    "Aneurysm",
+    "Blood Clots",
+    "DVT (Deep Vein Thrombosis)",
+    "Varicose veins",
+    "Heart disease",
+    "Pace Maker",
+    "Bruise easily",
+    "Raynaud’s",
+    "Hemophilia",
+  ];
+
+  const respiratoryOptions = [
+    "Chronic cough",
+    "Shortness of breath",
+    "Asthma",
+    "COPD",
+    "Bronchitis",
+    "Emphysema",
+    "Sinusitis",
+  ];
+
+  const neurologicalOptions = [
+    "Hypersensitivity",
+    "Dizziness",
+    "Fainting",
+    "Parkinson",
+    "Multiple Sclerosis",
+    "Cerebral Palsy",
+    "Bells Palsy",
+    "Spinal Injury",
+  ];
+
+  const headNeckOptions = [
+    "Headaches",
+    "Migraines",
+    "Concussion",
+    "Vision loss",
+    "Hearing loss",
+    "Ear problems",
+    "Corrective lenses / contacts",
+  ];
+
+  const digestiveOptions = [
+    "Constipation",
+    "Irritable bowel syndrome",
+    "Inflammatory bowel disease",
+    "Crohn’s Disease",
+    "Colostomy Bag",
+  ];
+
+  const otherConditionsOptions = [
+    "Osteoporosis",
+    "Arthritis",
+    "Fibromyalgia",
+    "Diabetes",
+    "Kidney Disease/Urinary Condition",
+    "Cancer",
+    "HIV",
+    "Nausea",
+    "Plantar Warts",
+    "Hepatitis",
+    "Herpes",
+    "Skin Conditions",
+  ];
 
   // 2. Define Submit Handler
   const onSubmit = async (values: BookNowFormSchema) => {
@@ -159,12 +316,6 @@ export default function BookNowForm() {
       setIsLoading(false);
     }
   };
-
-  // for form arrays
-  const { fields, append } = useFieldArray({
-    name: "currentMedications",
-    control: bookNowForm.control,
-  });
 
   return (
     <>
@@ -213,25 +364,6 @@ export default function BookNowForm() {
           />
           <FormField
             control={bookNowForm.control}
-            name="phoneNumber"
-            // ctrl click to see the field prop from react-hook-form
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone Number</FormLabel>
-                <FormMessage />
-                <FormControl>
-                  <Input
-                    // disabled if loading
-                    disabled={isloading}
-                    placeholder="7802225555"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={bookNowForm.control}
             name="email"
             // ctrl click to see the field prop from react-hook-form
             render={({ field }) => (
@@ -243,6 +375,25 @@ export default function BookNowForm() {
                     // disabled if loading
                     disabled={isloading}
                     placeholder="JimHalpert@gmail.com"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="phoneNumber"
+            // ctrl click to see the field prop from react-hook-form
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="7802225555"
                     {...field}
                   />
                 </FormControl>
@@ -334,7 +485,7 @@ export default function BookNowForm() {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
+                          "w-[300px] pl-3 text-left font-normal",
                           !field.value && "text-muted-foreground"
                         )}
                       >
@@ -364,6 +515,25 @@ export default function BookNowForm() {
           />
           <FormField
             control={bookNowForm.control}
+            name="personalHealthNumber"
+            // ctrl click to see the field prop from react-hook-form
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Personal Health Number</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="12345-0000"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
             name="guardian"
             // ctrl click to see the field prop from react-hook-form
             render={({ field }) => (
@@ -381,6 +551,7 @@ export default function BookNowForm() {
               </FormItem>
             )}
           />
+
           <FormField
             control={bookNowForm.control}
             name="emergencyContact"
@@ -458,7 +629,7 @@ export default function BookNowForm() {
             name="referringProfessional"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Referring Professional</FormLabel>
+                <FormLabel>Name of Referring Professional</FormLabel>
                 <FormMessage />
                 <FormControl>
                   <Input
@@ -512,16 +683,18 @@ export default function BookNowForm() {
             name="healthConcerns"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Health Concerns</FormLabel>
-                <FormMessage />
+                <FormLabel>
+                  Health concerns/Reason for scheduled visit:
+                </FormLabel>
                 <FormControl>
-                  <Input
-                    // disabled if loading
-                    disabled={isloading}
-                    placeholder="Health Concerns"
+                  <Textarea
+                    placeholder="Shoulder and hips are bothering me"
+                    className="resize-none"
                     {...field}
                   />
                 </FormControl>
+
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -533,10 +706,9 @@ export default function BookNowForm() {
                 <FormLabel>What Is making it better?</FormLabel>
                 <FormMessage />
                 <FormControl>
-                  <Input
-                    // disabled if loading
-                    disabled={isloading}
-                    placeholder="Osteopathy treatment"
+                  <Textarea
+                    placeholder="Osteopathy treatments"
+                    className="resize-none"
                     {...field}
                   />
                 </FormControl>
@@ -548,13 +720,12 @@ export default function BookNowForm() {
             name="whatIsMakingItWorse"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>What Is making it worse</FormLabel>
+                <FormLabel>What Is making it worse?</FormLabel>
                 <FormMessage />
                 <FormControl>
-                  <Input
-                    // disabled if loading
-                    disabled={isloading}
-                    placeholder="Sedentary lifestyle"
+                  <Textarea
+                    placeholder="Being sedentary"
+                    className="resize-none"
                     {...field}
                   />
                 </FormControl>
@@ -563,23 +734,147 @@ export default function BookNowForm() {
           />
           <FormField
             control={bookNowForm.control}
-            name="whatIsMakingItWorse"
+            name="currentMedications"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>What Is making it worse</FormLabel>
+                <FormLabel>
+                  Current medications and conditions treated
+                </FormLabel>
                 <FormMessage />
                 <FormControl>
-                  <Input
-                    // disabled if loading
-                    disabled={isloading}
-                    placeholder="Sedentary lifestyle"
+                  <Textarea
+                    placeholder="list medications"
+                    className="resize-none"
                     {...field}
                   />
                 </FormControl>
               </FormItem>
             )}
           />
-
+          <FormField
+            control={bookNowForm.control}
+            name="knownAllergiesOrHypersensitivities"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Known allergies or hypersensitivies</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Textarea
+                    placeholder="medication, foods, oils, seasonal etc..."
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="majorAccidentsOrSurgeries"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Major accidents or surgeries</FormLabel>
+                <FormDescription>Please also include date</FormDescription>
+                <FormMessage />
+                <FormControl>
+                  <Textarea
+                    placeholder="fractures, rods, pins, plates, shunts, implants etc"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="familyHistory"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Family history</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Textarea
+                    placeholder="family history"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="activitiesSportsHobbies"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Activities/sports/hobbies</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Textarea
+                    placeholder="Jiu Jitsu"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="treatmentExpectation"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Treatment expectation</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Textarea
+                    placeholder="To have more pain free range of motion"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="otherTherapyTreatment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Other therapy/treatment in last 3 months</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Textarea
+                    placeholder="Massage/Chiropractor/Physiotherapy/Manual Osteopath/Acupuncture"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <h1>Past medical history:</h1>
+          <FormField
+            control={bookNowForm.control}
+            name="otherTherapyTreatment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Cardiovascular</FormLabel>
+                <FormDescription>
+                  Please select applicable from dropdown
+                </FormDescription>
+                <FormMessage />
+                <FormControl>
+                  <Textarea
+                    placeholder="Massage/Chiropractor/Physiotherapy/Manual Osteopath/Acupuncture"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
           {/* disable buttons if loading */}
           <div className=" flex justify-center !mt-4">
             <Button disabled={isloading} type="submit">

@@ -22,29 +22,18 @@ const BookNowSchema = new Schema({
   referringProfessional: { type: String },
   howDidYouHearAboutUs: { type: String },
   referredTo: { type: String },
-  dateAddedByClient: { type: Date },
   healthConcerns: { type: String },
   whatIsMakingItBetter: { type: String },
   whatIsMakingItWorse: { type: String },
-  currentMedications: [
-    {
-      medication: { type: String },
-      conditionsTreated: { type: String },
-    },
-  ],
+  currentMedications: { type: String },
   knownAllergiesOrHypersensitivities: { type: String },
-  majorAccidentsOrSurgeries: [
-    {
-      description: { type: String },
-      date: { type: Date },
-    },
-  ],
+  majorAccidentsOrSurgeries: { type: String },
   familyHistory: { type: String },
   activitiesHobbies: { type: String },
   treatmentExpectation: { type: String },
   otherTherapyTreatment: { type: String },
-  pastMedicalHistory: {
-    cardiovascular: [
+  cardiovascular: {
+    type: [
       {
         type: String,
         enum: [
@@ -62,88 +51,72 @@ const BookNowSchema = new Schema({
           "Bruise easily",
           "Raynaud’s",
           "Hemophilia",
-          // Add more options here
         ],
       },
     ],
-    respiratory: [
-      {
-        type: String,
-        enum: [
-          "Chronic cough",
-          "Shortness of breath",
-          "Asthma",
-          "COPD",
-          "Bronchitis",
-          "Emphysema",
-          "Sinusitis",
-          // Add more options here
-        ],
-      },
+  },
+  respiratory: {
+    type: String,
+    enum: [
+      "Chronic cough",
+      "Shortness of breath",
+      "Asthma",
+      "COPD",
+      "Bronchitis",
+      "Emphysema",
+      "Sinusitis",
     ],
-    neurological: [
-      {
-        type: String,
-        enum: [
-          "Hypersensitivity",
-          "Dizziness",
-          "Fainting",
-          "Parkinson",
-          "Multiple Sclerosis",
-          "Cerebral Palsy",
-          "Bells Palsy",
-          "Spinal Injury",
-          // Add more options here
-        ],
-      },
+  },
+  neurological: {
+    type: String,
+    enum: [
+      "Hypersensitivity",
+      "Dizziness",
+      "Fainting",
+      "Parkinson",
+      "Multiple Sclerosis",
+      "Cerebral Palsy",
+      "Bells Palsy",
+      "Spinal Injury",
     ],
-    headNeck: [
-      {
-        type: String,
-        enum: [
-          "Headaches",
-          "Migraines",
-          "Concussion",
-          "Vision loss",
-          "Hearing loss",
-          "Ear problems",
-          "Corrective lenses / contacts",
-          // Add more options here
-        ],
-      },
+  },
+  headNeck: {
+    type: String,
+    enum: [
+      "Headaches",
+      "Migraines",
+      "Concussion",
+      "Vision loss",
+      "Hearing loss",
+      "Ear problems",
+      "Corrective lenses / contacts",
     ],
-    digestive: [
-      {
-        type: String,
-        enum: [
-          "Constipation",
-          "Irritable bowel syndrome",
-          "Inflammatory bowel disease",
-          "Crohn’s Disease",
-          "Colostomy Bag",
-          // Add more options here
-        ],
-      },
+  },
+  digestive: {
+    type: String,
+    enum: [
+      "Constipation",
+      "Irritable bowel syndrome",
+      "Inflammatory bowel disease",
+      "Crohn’s Disease",
+      "Colostomy Bag",
     ],
-    otherConditions: [
-      {
-        type: String,
-        enum: [
-          "Osteoporosis",
-          "Arthritis",
-          "Fibromyalgia",
-          "Diabetes",
-          "Kidney Disease/Urinary Condition",
-          "Cancer",
-          "HIV",
-          "Nausea",
-          "Plantar Warts",
-          "Hepatitis",
-          "Herpes",
-          "Skin Conditions",
-          // Add more options here
-        ],
-      },
+  },
+  otherConditions: {
+    type: String,
+    enum: [
+      "Osteoporosis",
+      "Arthritis",
+      "Fibromyalgia",
+      "Diabetes",
+      "Kidney Disease/Urinary Condition",
+      "Cancer",
+      "HIV",
+      "Nausea",
+      "Plantar Warts",
+      "Hepatitis",
+      "Herpes",
+      "Skin Conditions",
     ],
   },
   accuracyOfInformation: { type: Date, required: true },

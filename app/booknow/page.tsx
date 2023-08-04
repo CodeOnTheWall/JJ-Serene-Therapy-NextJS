@@ -44,6 +44,10 @@ export default function page() {
             className="bg-[#7209b7] md:w-[2px] md:h-[32px]"
           />
         </div>
+        <p>
+          Please fill out form, and then you will be prompted to schedule a
+          time. Please put N/A for form inputs that don&apos;t apply
+        </p>
         <div className=" space-y-6 md:w-full md:flex md:justify-evenly md:items-center">
           <BookNowForm />
         </div>
