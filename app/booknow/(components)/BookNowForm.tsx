@@ -38,7 +38,261 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
-import MotionTitle from "@/components/Motion/MotionTitle";
+import { Checkbox } from "@/components/ui/checkbox";
+
+const cardiovascular = [
+  {
+    id: "na",
+    label: "NA",
+  },
+  {
+    id: "highBloodPressure",
+    label: "High blood pressure",
+  },
+  {
+    id: "lowBloodPressure",
+    label: "Low blood pressure",
+  },
+  {
+    id: "chronicCongestiveHeartFailure",
+    label: "Chronic congestive heart failure",
+  },
+  {
+    id: "heartAttack",
+    label: "Heart attack",
+  },
+  {
+    id: "stroke",
+    label: "Stroke",
+  },
+  {
+    id: "aneurysm",
+    label: "Aneurysm",
+  },
+  {
+    id: "bloodClots",
+    label: "Blood Clots",
+  },
+  {
+    id: "dvt",
+    label: "DVT (Deep Vein Thrombosis)",
+  },
+  {
+    id: "varicoseVeins",
+    label: "Varicose veins",
+  },
+  {
+    id: "heartDisease",
+    label: "Heart disease",
+  },
+  {
+    id: "paceMaker",
+    label: "Pace Maker",
+  },
+  {
+    id: "bruiseEasily",
+    label: "Bruise easily",
+  },
+  {
+    id: "raynauds",
+    label: "Raynaud’s",
+  },
+  {
+    id: "hemophilia",
+    label: "Hemophilia",
+  },
+];
+
+const respiratory = [
+  {
+    id: "na",
+    label: "NA",
+  },
+  {
+    id: "chronicCough",
+    label: "Chronic cough",
+  },
+  {
+    id: "shortnessOfBreath",
+    label: "Shortness of breath",
+  },
+  {
+    id: "asthma",
+    label: "Asthma",
+  },
+  {
+    id: "copd",
+    label: "COPD",
+  },
+  {
+    id: "bronchitis",
+    label: "Bronchitis",
+  },
+  {
+    id: "emphysema",
+    label: "Emphysema",
+  },
+  {
+    id: "sinusitis",
+    label: "Sinusitis",
+  },
+];
+
+const neurological = [
+  {
+    id: "na",
+    label: "NA",
+  },
+  {
+    id: "hypersensitivity",
+    label: "Hypersensitivity",
+  },
+  {
+    id: "dizziness",
+    label: "Dizziness",
+  },
+  {
+    id: "fainting",
+    label: "Fainting",
+  },
+  {
+    id: "parkinson",
+    label: "Parkinson",
+  },
+  {
+    id: "multipleSclerosis",
+    label: "Multiple Sclerosis",
+  },
+  {
+    id: "cerebralPalsy",
+    label: "Cerebral Palsy",
+  },
+  {
+    id: "bellsPalsy",
+    label: "Bells Palsy",
+  },
+  {
+    id: "spinalInjury",
+    label: "Spinal Injury",
+  },
+];
+
+const headNeck = [
+  {
+    id: "na",
+    label: "NA",
+  },
+  {
+    id: "headaches",
+    label: "Headaches",
+  },
+  {
+    id: "migraines",
+    label: "Migraines",
+  },
+  {
+    id: "concussion",
+    label: "Concussion",
+  },
+  {
+    id: "visionLoss",
+    label: "Vision loss",
+  },
+  {
+    id: "hearingLoss",
+    label: "Hearing loss",
+  },
+  {
+    id: "earProblems",
+    label: "Ear problems",
+  },
+  {
+    id: "correctiveLensesContacts",
+    label: "Corrective lenses / contacts",
+  },
+];
+
+const digestive = [
+  {
+    id: "na",
+    label: "NA",
+  },
+  {
+    id: "constipation",
+    label: "Constipation",
+  },
+  {
+    id: "irritableBowelSyndrome",
+    label: "Irritable bowel syndrome",
+  },
+  {
+    id: "inflammatoryBowelDisease",
+    label: "Inflammatory bowel disease",
+  },
+  {
+    id: "crohnsDisease",
+    label: "Crohn’s Disease",
+  },
+  {
+    id: "colostomyBag",
+    label: "Colostomy Bag",
+  },
+];
+
+const otherConditions = [
+  {
+    id: "na",
+    label: "NA",
+  },
+  {
+    id: "osteoporosis",
+    label: "Osteoporosis",
+  },
+  {
+    id: "arthritis",
+    label: "Arthritis",
+  },
+  {
+    id: "fibromyalgia",
+    label: "Fibromyalgia",
+  },
+  {
+    id: "diabetes",
+    label: "Diabetes",
+  },
+  {
+    id: "kidneyDiseaseUrinaryCondition",
+    label: "Kidney Disease/Urinary Condition",
+  },
+  {
+    id: "cancer",
+    label: "Cancer",
+  },
+  {
+    id: "hiv",
+    label: "HIV",
+  },
+  {
+    id: "nausea",
+    label: "Nausea",
+  },
+  {
+    id: "plantarWarts",
+    label: "Plantar Warts",
+  },
+  {
+    id: "hepatitis",
+    label: "Hepatitis",
+  },
+  {
+    id: "herpes",
+    label: "Herpes",
+  },
+  {
+    id: "skinConditions",
+    label: "Skin Conditions",
+  },
+];
 
 // zod schemas
 const bookNowFormSchema = z.object({
@@ -180,6 +434,62 @@ const bookNowFormSchema = z.object({
       message:
         "Other therapy treatments must not be longer than 150 characters.",
     }),
+  cardiovascular: z
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "Please put NA if none apply",
+    }),
+  respiratory: z
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "Please put NA if none apply",
+    }),
+  neurological: z
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "Please put NA if none apply",
+    }),
+  headNeck: z.array(z.string()).refine((value) => value.some((item) => item), {
+    message: "Please put NA if none apply",
+  }),
+  digestive: z.array(z.string()).refine((value) => value.some((item) => item), {
+    message: "Please put NA if none apply",
+  }),
+  otherConditions: z
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "Please put NA if none apply",
+    }),
+  accuracyOfInformation: z.date({
+    required_error: "Date required",
+  }),
+  privacyAndSharingOfInformation: z.date({
+    required_error: "Date required",
+  }),
+  cancellationPolicy: z.date({
+    required_error: "Date required",
+  }),
+  lateArrivalPolicy: z.date({
+    required_error: "Date required",
+  }),
+  inappropriateBehaviourPolicy: z.date({
+    required_error: "Date required",
+  }),
+  treatmentConsentStatement: z.date({
+    required_error: "Date required",
+  }),
+  minorConsent: z.date({
+    required_error: "Date required",
+  }),
+  paymentPolicy: z.date({
+    required_error: "Date required",
+  }),
+  communicationConsent: z.date({
+    required_error: "Date required",
+  }),
+  signature: z.date({
+    required_error: "Date required",
+  }),
 });
 // z.infer is used to extract the type info from a zod schema
 // and the type to be extracted is typeof formSchema
@@ -221,79 +531,13 @@ export default function BookNowForm() {
       activitiesSportsHobbies: "",
       treatmentExpectation: "",
       otherTherapyTreatment: "",
+      cardiovascular: ["NA"],
+      neurological: ["NA"],
+      headNeck: ["NA"],
+      digestive: ["NA"],
+      otherConditions: ["NA"],
     },
   });
-
-  const cardiovascular = [
-    "High blood pressure",
-    "Low blood pressure",
-    "Chronic congestive heart failure",
-    "Heart attack",
-    "Stroke",
-    "Aneurysm",
-    "Blood Clots",
-    "DVT (Deep Vein Thrombosis)",
-    "Varicose veins",
-    "Heart disease",
-    "Pace Maker",
-    "Bruise easily",
-    "Raynaud’s",
-    "Hemophilia",
-  ];
-
-  const respiratoryOptions = [
-    "Chronic cough",
-    "Shortness of breath",
-    "Asthma",
-    "COPD",
-    "Bronchitis",
-    "Emphysema",
-    "Sinusitis",
-  ];
-
-  const neurologicalOptions = [
-    "Hypersensitivity",
-    "Dizziness",
-    "Fainting",
-    "Parkinson",
-    "Multiple Sclerosis",
-    "Cerebral Palsy",
-    "Bells Palsy",
-    "Spinal Injury",
-  ];
-
-  const headNeckOptions = [
-    "Headaches",
-    "Migraines",
-    "Concussion",
-    "Vision loss",
-    "Hearing loss",
-    "Ear problems",
-    "Corrective lenses / contacts",
-  ];
-
-  const digestiveOptions = [
-    "Constipation",
-    "Irritable bowel syndrome",
-    "Inflammatory bowel disease",
-    "Crohn’s Disease",
-    "Colostomy Bag",
-  ];
-
-  const otherConditionsOptions = [
-    "Osteoporosis",
-    "Arthritis",
-    "Fibromyalgia",
-    "Diabetes",
-    "Kidney Disease/Urinary Condition",
-    "Cancer",
-    "HIV",
-    "Nausea",
-    "Plantar Warts",
-    "Hepatitis",
-    "Herpes",
-    "Skin Conditions",
-  ];
 
   // 2. Define Submit Handler
   const onSubmit = async (values: BookNowFormSchema) => {
@@ -743,7 +987,7 @@ export default function BookNowForm() {
                 <FormMessage />
                 <FormControl>
                   <Textarea
-                    placeholder="list medications"
+                    placeholder="List medications"
                     className="resize-none"
                     {...field}
                   />
@@ -760,7 +1004,7 @@ export default function BookNowForm() {
                 <FormMessage />
                 <FormControl>
                   <Textarea
-                    placeholder="medication, foods, oils, seasonal etc..."
+                    placeholder="Medication, foods, oils, seasonal etc..."
                     className="resize-none"
                     {...field}
                   />
@@ -778,7 +1022,7 @@ export default function BookNowForm() {
                 <FormMessage />
                 <FormControl>
                   <Textarea
-                    placeholder="fractures, rods, pins, plates, shunts, implants etc"
+                    placeholder="Fractures, rods, pins, plates, shunts, implants etc"
                     className="resize-none"
                     {...field}
                   />
@@ -795,7 +1039,7 @@ export default function BookNowForm() {
                 <FormMessage />
                 <FormControl>
                   <Textarea
-                    placeholder="family history"
+                    placeholder="Family history"
                     className="resize-none"
                     {...field}
                   />
@@ -857,21 +1101,750 @@ export default function BookNowForm() {
           <h1>Past medical history:</h1>
           <FormField
             control={bookNowForm.control}
-            name="otherTherapyTreatment"
-            render={({ field }) => (
+            name="cardiovascular"
+            render={() => (
               <FormItem>
-                <FormLabel>Cardiovascular</FormLabel>
+                <div className="mb-4">
+                  <FormLabel className="text-base">Cardiovascular</FormLabel>
+                  <FormDescription>
+                    Select the options that apply or put NA
+                  </FormDescription>
+                </div>
+                {cardiovascular.map((option) => (
+                  <FormField
+                    key={option.id}
+                    control={bookNowForm.control}
+                    name="cardiovascular"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={option.id}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(option.id)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, option.id])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== option.id
+                                      )
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {option.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="respiratory"
+            render={() => (
+              <FormItem>
+                <div className="mb-4">
+                  <FormLabel className="text-base">Respiratory</FormLabel>
+                  <FormDescription>
+                    Select the options that apply or put NA
+                  </FormDescription>
+                </div>
+                {respiratory.map((option) => (
+                  <FormField
+                    key={option.id}
+                    control={bookNowForm.control}
+                    name="respiratory"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={option.id}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(option.id)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, option.id])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== option.id
+                                      )
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {option.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="neurological"
+            render={() => (
+              <FormItem>
+                <div className="mb-4">
+                  <FormLabel className="text-base">Neurological</FormLabel>
+                  <FormDescription>
+                    Select the options that apply or put NA
+                  </FormDescription>
+                </div>
+                {neurological.map((option) => (
+                  <FormField
+                    key={option.id}
+                    control={bookNowForm.control}
+                    name="neurological"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={option.id}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(option.id)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, option.id])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== option.id
+                                      )
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {option.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="headNeck"
+            render={() => (
+              <FormItem>
+                <div className="mb-4">
+                  <FormLabel className="text-base">Head/Neck</FormLabel>
+                  <FormDescription>
+                    Select the options that apply or put NA
+                  </FormDescription>
+                </div>
+                {headNeck.map((option) => (
+                  <FormField
+                    key={option.id}
+                    control={bookNowForm.control}
+                    name="headNeck"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={option.id}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(option.id)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, option.id])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== option.id
+                                      )
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {option.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="digestive"
+            render={() => (
+              <FormItem>
+                <div className="mb-4">
+                  <FormLabel className="text-base">Digestive</FormLabel>
+                  <FormDescription>
+                    Select the options that apply or put NA
+                  </FormDescription>
+                </div>
+                {digestive.map((option) => (
+                  <FormField
+                    key={option.id}
+                    control={bookNowForm.control}
+                    name="digestive"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={option.id}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(option.id)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, option.id])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== option.id
+                                      )
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {option.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="otherConditions"
+            render={() => (
+              <FormItem>
+                <div className="mb-4">
+                  <FormLabel className="text-base">Other Conditions</FormLabel>
+                  <FormDescription>
+                    Select the options that apply or put NA
+                  </FormDescription>
+                </div>
+                {otherConditions.map((option) => (
+                  <FormField
+                    key={option.id}
+                    control={bookNowForm.control}
+                    name="otherConditions"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={option.id}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(option.id)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, option.id])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== option.id
+                                      )
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {option.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <h1>
+            Please put Today&apos;s Date for each Policy indicating that you
+            agree to each Policy
+          </h1>
+          <FormField
+            control={bookNowForm.control}
+            name="accuracyOfInformation"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Accuracy of Information</FormLabel>
                 <FormDescription>
-                  Please select applicable from dropdown
+                  I certify that the above medical information is correct to my
+                  knowledge.
                 </FormDescription>
                 <FormMessage />
-                <FormControl>
-                  <Textarea
-                    placeholder="Massage/Chiropractor/Physiotherapy/Manual Osteopath/Acupuncture"
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="privacyAndSharingOfInformation"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Privacy and Sharing of Information</FormLabel>
+                <FormDescription>
+                  I authorize the clinic and its associated health professionals
+                  to collect my personal and medical information as documented
+                  above. In addition, I authorize the clinic and its associated
+                  health professionals to communicate with my family doctor
+                  and/or referring doctor as deemed necessary for my beneficial
+                  treatment. I also understand that my personal and medical
+                  information is confidential and will only be disclosed to
+                  third parties with my permission.
+                </FormDescription>
+                <FormMessage />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="cancellationPolicy"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Cancellation Policy</FormLabel>
+                <FormDescription>
+                  Please arrive 5 minutes prior to your appointment to allow
+                  time for any required paperwork as well as answer intake
+                  questions your therapist may have. Arriving after your
+                  appointment time may result in lost time from your treatment
+                  as we are unable to exceed that reserved time without
+                  affecting the next client session. Full service fees will be
+                  charged even when sessions are shortened due to late arrival.
+                </FormDescription>
+                <FormMessage />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="lateArrivalPolicy"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Late Arrival Policy</FormLabel>
+                <FormDescription>
+                  Please arrive 5 minutes prior to your appointment to allow
+                  time for any required paperwork as well as answer intake
+                  questions your therapist may have. Arriving after your
+                  appointment time may result in lost time from your treatment
+                  as we are unable to exceed that reserved time without
+                  affecting the next client session. Full service fees will be
+                  charged even when sessions are shortened due to late arrival.
+                </FormDescription>
+                <FormMessage />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="inappropriateBehaviourPolicy"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Inappropriate Behaviour Policy</FormLabel>
+                <FormDescription>
+                  Our manual therapies are for relaxation & therapeutic purposes
+                  only. There is absolutely no sexual component to treatment
+                  whatsoever. Any insinuation, joke, gesture, conversations or
+                  request will result in immediate termination of the session
+                  and a refusal of any and all future services. Full service
+                  fees will be charged regardless the length of the session.
+                </FormDescription>
+                <FormMessage />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="treatmentConsentStatement"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Treatment Consent Statement</FormLabel>
+                <FormDescription>
+                  I understand that services are provided for stress reduction,
+                  relaxation, relief from muscular tension and improvement of
+                  circulation & energy flow. If I experience pain or discomfort
+                  during my session, I will immediately inform my therapist so
+                  that pressure/strokes or any other aspect of the treatment can
+                  be adjusted to to my level of comfort/satisfaction. While
+                  rare, some clients may experience short-term aggravation of
+                  symptoms or bruising as a result of the treatment given. I
+                  understand that the services offered are not a substitute for
+                  medical care. I affirm that I have notified the therapist of
+                  all medical conditions and injuries. I agree to inform the
+                  therapist of any changes in my health. I understand that there
+                  shall be no liability on the therapist’s part should I forget
+                  to do so. By signing this release, I hereby waive and release
+                  the therapist and Urban Massage & Wellness Inc. from any and
+                  all liability, past, present & future relating to manual
+                  osteopathy & massage therapies including (but not limited to)
+                  myofascial cupping, hot stone treatments, Rapid NFR & fascial
+                  stretch therapy.
+                </FormDescription>
+                <FormMessage />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="minorConsent"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>
+                  Minor Consent (Pertains to clients 17 & under only)
+                </FormLabel>
+                <FormDescription>
+                  I have competed the intake form for the above mentioned minor
+                  and informed the therapist of any and all relevant medical
+                  history and concerns. I understand the scope of manual therapy
+                  and that it is not meant to diagnose, treat or cure any
+                  conditions and is not a replacement for standard medical care.
+                  I give permission for my minor child to receive treatment(s)
+                  at Urban Massage & Wellness and agree to all of the above
+                  terms.
+                </FormDescription>
+                <FormMessage />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="paymentPolicy"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Payment Policy</FormLabel>
+                <FormDescription>
+                  Payment is due at time of treatment. In the event my claim(s)
+                  are declined or come back as pending by the insurer/plan
+                  administrator, I understand that I remain responsible for the
+                  payment to the provider for any services rendered and/or
+                  supplies provided.
+                </FormDescription>
+                <FormMessage />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="communicationConsent"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Communication Consent</FormLabel>
+                <FormDescription>
+                  I understand that the therapist is an Independent Contractor
+                  and I consent to them contacting me directly, by the methods
+                  for which I have provided my contact information, in regards
+                  to matters related to my appointments, including booking,
+                  cancellations, or rescheduling, and my treatment plan,
+                  including follow-ups and additional support.
+                </FormDescription>
+                <FormMessage />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
               </FormItem>
             )}
           />
