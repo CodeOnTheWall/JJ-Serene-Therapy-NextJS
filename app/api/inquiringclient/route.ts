@@ -1,12 +1,12 @@
 import connectToDB from "@/utils/database";
-import Client from "@/models/client";
+import InquiringClient from "@/models/inquiringclient";
 
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
     // req.json parses the json to js
-    const { firstName, lastName, phoneNumber, email, subject, message } =
+    const { firstName, lastName, phone, email, subject, message } =
       await req.json();
 
     if (!firstName) {
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     if (!lastName) {
       return new NextResponse("Last name is required", { status: 400 });
     }
-    if (!phoneNumber) {
+    if (!phone) {
       return new NextResponse("Phone number is required", { status: 400 });
     }
     if (!email) {
@@ -31,10 +31,10 @@ export async function POST(req: Request) {
     // and dies when process completes
     await connectToDB();
 
-    const newContactClient = new Client({
+    const newContactClient = new InquiringClient({
       firstName,
       lastName,
-      phoneNumber,
+      phone,
       email,
       subject,
       message,
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    const contactClients = await Client.find({});
+    const contactClients = await InquiringClient.find({});
 
     if (!contactClients) {
       return new NextResponse("No Contact Clients yet", { status: 404 });

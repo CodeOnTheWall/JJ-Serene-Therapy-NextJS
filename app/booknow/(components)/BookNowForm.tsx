@@ -42,254 +42,254 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 const cardiovascular = [
   {
-    id: "na",
+    id: "NA",
     label: "NA",
   },
   {
-    id: "highBloodPressure",
+    id: "High blood pressure",
     label: "High blood pressure",
   },
   {
-    id: "lowBloodPressure",
+    id: "Low blood pressure",
     label: "Low blood pressure",
   },
   {
-    id: "chronicCongestiveHeartFailure",
+    id: "Chronic congestive heart failure",
     label: "Chronic congestive heart failure",
   },
   {
-    id: "heartAttack",
+    id: "Heart attack",
     label: "Heart attack",
   },
   {
-    id: "stroke",
+    id: "Stroke",
     label: "Stroke",
   },
   {
-    id: "aneurysm",
+    id: "Aneurysm",
     label: "Aneurysm",
   },
   {
-    id: "bloodClots",
+    id: "Blood Clots",
     label: "Blood Clots",
   },
   {
-    id: "dvt",
+    id: "DVT (Deep Vein Thrombosis)",
     label: "DVT (Deep Vein Thrombosis)",
   },
   {
-    id: "varicoseVeins",
+    id: "Varicose veins",
     label: "Varicose veins",
   },
   {
-    id: "heartDisease",
+    id: "Heart disease",
     label: "Heart disease",
   },
   {
-    id: "paceMaker",
+    id: "Pace Maker",
     label: "Pace Maker",
   },
   {
-    id: "bruiseEasily",
+    id: "Bruise easily",
     label: "Bruise easily",
   },
   {
-    id: "raynauds",
+    id: "Raynaud’s",
     label: "Raynaud’s",
   },
   {
-    id: "hemophilia",
+    id: "Hemophilia",
     label: "Hemophilia",
   },
 ];
 
 const respiratory = [
   {
-    id: "na",
+    id: "NA",
     label: "NA",
   },
   {
-    id: "chronicCough",
+    id: "Chronic cough",
     label: "Chronic cough",
   },
   {
-    id: "shortnessOfBreath",
+    id: "Shortness of breath",
     label: "Shortness of breath",
   },
   {
-    id: "asthma",
+    id: "Asthma",
     label: "Asthma",
   },
   {
-    id: "copd",
+    id: "COPD",
     label: "COPD",
   },
   {
-    id: "bronchitis",
+    id: "Bronchitis",
     label: "Bronchitis",
   },
   {
-    id: "emphysema",
+    id: "Emphysema",
     label: "Emphysema",
   },
   {
-    id: "sinusitis",
+    id: "Sinusitis",
     label: "Sinusitis",
   },
 ];
 
 const neurological = [
   {
-    id: "na",
+    id: "NA",
     label: "NA",
   },
   {
-    id: "hypersensitivity",
+    id: "Hypersensitivity",
     label: "Hypersensitivity",
   },
   {
-    id: "dizziness",
+    id: "Dizziness",
     label: "Dizziness",
   },
   {
-    id: "fainting",
+    id: "Fainting",
     label: "Fainting",
   },
   {
-    id: "parkinson",
+    id: "Parkinson",
     label: "Parkinson",
   },
   {
-    id: "multipleSclerosis",
+    id: "Multiple Sclerosis",
     label: "Multiple Sclerosis",
   },
   {
-    id: "cerebralPalsy",
+    id: "Cerebral Palsy",
     label: "Cerebral Palsy",
   },
   {
-    id: "bellsPalsy",
+    id: "Bells Palsy",
     label: "Bells Palsy",
   },
   {
-    id: "spinalInjury",
+    id: "Spinal Injury",
     label: "Spinal Injury",
   },
 ];
 
 const headNeck = [
   {
-    id: "na",
+    id: "NA",
     label: "NA",
   },
   {
-    id: "headaches",
+    id: "Headaches",
     label: "Headaches",
   },
   {
-    id: "migraines",
+    id: "Migraines",
     label: "Migraines",
   },
   {
-    id: "concussion",
+    id: "Concussion",
     label: "Concussion",
   },
   {
-    id: "visionLoss",
+    id: "Vision loss",
     label: "Vision loss",
   },
   {
-    id: "hearingLoss",
+    id: "Hearing loss",
     label: "Hearing loss",
   },
   {
-    id: "earProblems",
+    id: "Ear problems",
     label: "Ear problems",
   },
   {
-    id: "correctiveLensesContacts",
+    id: "Corrective lenses / contacts",
     label: "Corrective lenses / contacts",
   },
 ];
 
 const digestive = [
   {
-    id: "na",
+    id: "NA",
     label: "NA",
   },
   {
-    id: "constipation",
+    id: "Constipation",
     label: "Constipation",
   },
   {
-    id: "irritableBowelSyndrome",
+    id: "Irritable bowel syndrome",
     label: "Irritable bowel syndrome",
   },
   {
-    id: "inflammatoryBowelDisease",
+    id: "Inflammatory bowel disease",
     label: "Inflammatory bowel disease",
   },
   {
-    id: "crohnsDisease",
+    id: "Crohn’s Disease",
     label: "Crohn’s Disease",
   },
   {
-    id: "colostomyBag",
+    id: "Colostomy Bag",
     label: "Colostomy Bag",
   },
 ];
 
 const otherConditions = [
   {
-    id: "na",
+    id: "NA",
     label: "NA",
   },
   {
-    id: "osteoporosis",
+    id: "Osteoporosis",
     label: "Osteoporosis",
   },
   {
-    id: "arthritis",
+    id: "Arthritis",
     label: "Arthritis",
   },
   {
-    id: "fibromyalgia",
+    id: "Fibromyalgia",
     label: "Fibromyalgia",
   },
   {
-    id: "diabetes",
+    id: "Diabetes",
     label: "Diabetes",
   },
   {
-    id: "kidneyDiseaseUrinaryCondition",
+    id: "Kidney Disease/Urinary Condition",
     label: "Kidney Disease/Urinary Condition",
   },
   {
-    id: "cancer",
+    id: "Cancer",
     label: "Cancer",
   },
   {
-    id: "hiv",
+    id: "HIV",
     label: "HIV",
   },
   {
-    id: "nausea",
+    id: "Nausea",
     label: "Nausea",
   },
   {
-    id: "plantarWarts",
+    id: "Plantar Warts",
     label: "Plantar Warts",
   },
   {
-    id: "hepatitis",
+    id: "Hepatitis",
     label: "Hepatitis",
   },
   {
-    id: "herpes",
+    id: "Herpes",
     label: "Herpes",
   },
   {
-    id: "skinConditions",
+    id: "Skin Conditions",
     label: "Skin Conditions",
   },
 ];
@@ -305,7 +305,7 @@ const bookNowFormSchema = z.object({
     message: "Last Name must be at least 2 characters",
   }),
   email: z.string().email(),
-  phoneNumber: z.string().min(10, {
+  phone: z.string().min(10, {
     message: "Phone number must be at least 10 digits",
   }),
   address: z.string().min(5, {
@@ -328,6 +328,9 @@ const bookNowFormSchema = z.object({
   }),
   emergencyContact: z.string().min(2, {
     message: "Emergency contact must be at least 2 characters",
+  }),
+  emergencyContactPhone: z.string().min(2, {
+    message: "Emergency contact number must be at least 10 characters",
   }),
   occupation: z.string().min(2, {
     message: "Occupation must be at least 2 characters",
@@ -487,8 +490,8 @@ const bookNowFormSchema = z.object({
   communicationConsent: z.date({
     required_error: "Date required",
   }),
-  signature: z.date({
-    required_error: "Date required",
+  signature: z.string().min(2, {
+    message: "Signature must be at least 2 characters",
   }),
 });
 // z.infer is used to extract the type info from a zod schema
@@ -509,12 +512,13 @@ export default function BookNowForm() {
     defaultValues: {
       firstName: "",
       lastName: "",
-      phoneNumber: "",
       email: "",
+      phone: "",
       address: "",
       personalHealthNumber: "",
       guardian: "",
       emergencyContact: "",
+      emergencyContactPhone: "",
       occupation: "",
       employer: "",
       familyDoctor: "",
@@ -531,11 +535,13 @@ export default function BookNowForm() {
       activitiesSportsHobbies: "",
       treatmentExpectation: "",
       otherTherapyTreatment: "",
-      cardiovascular: ["NA"],
-      neurological: ["NA"],
-      headNeck: ["NA"],
-      digestive: ["NA"],
-      otherConditions: ["NA"],
+      cardiovascular: [],
+      respiratory: [],
+      neurological: [],
+      headNeck: [],
+      digestive: [],
+      otherConditions: [],
+      signature: "",
     },
   });
 
@@ -544,13 +550,54 @@ export default function BookNowForm() {
     try {
       setIsLoading(true);
 
-      await fetch("/api/booknow", {
+      await fetch("/api/booknowclient", {
         method: "POST",
         body: JSON.stringify({
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
-          phoneNumber: values.phoneNumber,
+          phone: values.phone,
+          address: values.address,
+          sex: values.sex,
+          gender: values.gender,
+          dateOfBirth: values.dateOfBirth,
+          personalHealthNumber: values.personalHealthNumber,
+          guardian: values.guardian,
+          emergencyContact: values.emergencyContact,
+          emergencyContactPhone: values.emergencyContactPhone,
+          occupation: values.occupation,
+          employer: values.employer,
+          familyDoctor: values.familyDoctor,
+          referringProfessional: values.referringProfessional,
+          howDidYouHearAboutUs: values.howDidYouHearAboutUs,
+          referredTo: values.referredTo,
+          healthConcerns: values.healthConcerns,
+          whatIsMakingItBetter: values.whatIsMakingItBetter,
+          whatIsMakingItWorse: values.whatIsMakingItWorse,
+          currentMedications: values.currentMedications,
+          knownAllergiesOrHypersensitivities:
+            values.knownAllergiesOrHypersensitivities,
+          majorAccidentsOrSurgeries: values.majorAccidentsOrSurgeries,
+          familyHistory: values.familyHistory,
+          activitiesSportsHobbies: values.activitiesSportsHobbies,
+          treatmentExpectation: values.treatmentExpectation,
+          otherTherapyTreatment: values.otherTherapyTreatment,
+          cardiovascular: values.cardiovascular,
+          respiratory: values.respiratory,
+          neurological: values.neurological,
+          headNeck: values.headNeck,
+          digestive: values.digestive,
+          otherConditions: values.otherConditions,
+          accuracyOfInformation: values.accuracyOfInformation,
+          privacyAndSharingOfInformation: values.privacyAndSharingOfInformation,
+          cancellationPolicy: values.cancellationPolicy,
+          lateArrivalPolicy: values.lateArrivalPolicy,
+          inappropriateBehaviourPolicy: values.inappropriateBehaviourPolicy,
+          treatmentConsentStatement: values.treatmentConsentStatement,
+          minorConsent: values.minorConsent,
+          paymentPolicy: values.paymentPolicy,
+          communicationConsent: values.communicationConsent,
+          signature: values.signature,
         }),
       });
     } catch (error) {
@@ -627,7 +674,7 @@ export default function BookNowForm() {
           />
           <FormField
             control={bookNowForm.control}
-            name="phoneNumber"
+            name="phone"
             // ctrl click to see the field prop from react-hook-form
             render={({ field }) => (
               <FormItem>
@@ -816,6 +863,24 @@ export default function BookNowForm() {
           />
           <FormField
             control={bookNowForm.control}
+            name="emergencyContactPhone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Emergency Contact Phone Number</FormLabel>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="7809996666"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
             name="occupation"
             render={({ field }) => (
               <FormItem>
@@ -930,6 +995,8 @@ export default function BookNowForm() {
                 <FormLabel>
                   Health concerns/Reason for scheduled visit:
                 </FormLabel>
+                <FormMessage />
+
                 <FormControl>
                   <Textarea
                     placeholder="Shoulder and hips are bothering me"
@@ -937,8 +1004,6 @@ export default function BookNowForm() {
                     {...field}
                   />
                 </FormControl>
-
-                <FormMessage />
               </FormItem>
             )}
           />
@@ -1845,6 +1910,25 @@ export default function BookNowForm() {
                     />
                   </PopoverContent>
                 </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={bookNowForm.control}
+            name="signature"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Signature</FormLabel>
+                <FormDescription>Electronic Signature</FormDescription>
+                <FormMessage />
+                <FormControl>
+                  <Input
+                    // disabled if loading
+                    disabled={isloading}
+                    placeholder="Kris Sundquist"
+                    {...field}
+                  />
+                </FormControl>
               </FormItem>
             )}
           />

@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const ClientSchema = new Schema({
+const InquiringClientSchema = new Schema({
   firstName: {
     type: String,
     required: [true, "First name is required"],
@@ -9,7 +9,7 @@ const ClientSchema = new Schema({
     type: String,
     required: [true, "Last name is required"],
   },
-  phoneNumber: {
+  phone: {
     type: String,
     required: [true, "Phone Number is required"],
   },
@@ -33,5 +33,6 @@ const ClientSchema = new Schema({
 // export default User;
 
 // look into the models first, if not there (||), create new one
-const Client = models.Client || model("Client", ClientSchema);
-export default Client;
+const InquiringClient =
+  models.InquiringClient || model("InquiringClient", InquiringClientSchema);
+export default InquiringClient;

@@ -29,7 +29,7 @@ const contactFormSchema = z.object({
   lastName: z.string().min(1, {
     message: "Last Name must be at least 2 characters",
   }),
-  phoneNumber: z.string().min(10, {
+  phone: z.string().min(10, {
     message: "Phone number must be at least 10 digits",
   }),
   subject: z.string().min(1, {
@@ -58,7 +58,7 @@ export default function ContactForm() {
     defaultValues: {
       firstName: "",
       lastName: "",
-      phoneNumber: "",
+      phone: "",
       email: "",
       subject: "",
       message: "",
@@ -76,13 +76,13 @@ export default function ContactForm() {
       window.location.href = `mailto:jjserenetherapy@hotmail.com?subject=${values.subject}
       &body=Hi, my name is ${values.firstName} ${values.lastName}. ${values.message}. I can be reached at ${values.phoneNumber} or ${values.email}`;
 
-      await fetch("/api/clients", {
+      await fetch("/api/inquiringclient", {
         method: "POST",
         body: JSON.stringify({
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
-          phoneNumber: values.phoneNumber,
+          phone: values.phone,
           subject: values.subject,
           message: values.message,
         }),
@@ -142,7 +142,7 @@ export default function ContactForm() {
           />
           <FormField
             control={contactForm.control}
-            name="phoneNumber"
+            name="phone"
             // ctrl click to see the field prop from react-hook-form
             render={({ field }) => (
               <FormItem>

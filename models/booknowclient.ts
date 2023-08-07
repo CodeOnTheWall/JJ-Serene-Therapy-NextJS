@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const BookNowSchema = new Schema({
+const BookNowClientSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
@@ -16,6 +16,7 @@ const BookNowSchema = new Schema({
   personalHealthNumber: { type: String, required: true },
   guardian: { type: String },
   emergencyContact: { type: String },
+  emergencyContactPhone: { type: String },
   occupation: { type: String },
   employer: { type: String },
   familyDoctor: { type: String },
@@ -29,14 +30,16 @@ const BookNowSchema = new Schema({
   knownAllergiesOrHypersensitivities: { type: String },
   majorAccidentsOrSurgeries: { type: String },
   familyHistory: { type: String },
-  activitiesHobbies: { type: String },
+  activitiesSportsHobbies: { type: String },
   treatmentExpectation: { type: String },
   otherTherapyTreatment: { type: String },
   cardiovascular: {
+    // array of objects
     type: [
       {
         type: String,
         enum: [
+          "NA",
           "High blood pressure",
           "Low blood pressure",
           "Chronic congestive heart failure",
@@ -56,67 +59,101 @@ const BookNowSchema = new Schema({
     ],
   },
   respiratory: {
-    type: String,
-    enum: [
-      "Chronic cough",
-      "Shortness of breath",
-      "Asthma",
-      "COPD",
-      "Bronchitis",
-      "Emphysema",
-      "Sinusitis",
+    // array of objects
+    type: [
+      {
+        type: String,
+        enum: [
+          "NA",
+          "Chronic cough",
+          "Shortness of breath",
+          "Asthma",
+          "COPD",
+          "Bronchitis",
+          "Emphysema",
+          "Sinusitis",
+        ],
+      },
     ],
   },
   neurological: {
-    type: String,
-    enum: [
-      "Hypersensitivity",
-      "Dizziness",
-      "Fainting",
-      "Parkinson",
-      "Multiple Sclerosis",
-      "Cerebral Palsy",
-      "Bells Palsy",
-      "Spinal Injury",
+    type: [
+      {
+        type: String,
+        enum: [
+          "NA",
+          "Hypersensitivity",
+          "Dizziness",
+          "Fainting",
+          "Parkinson",
+          "Multiple Sclerosis",
+          "Cerebral Palsy",
+          "Bells Palsy",
+          "Spinal Injury",
+        ],
+      },
     ],
   },
   headNeck: {
-    type: String,
-    enum: [
-      "Headaches",
-      "Migraines",
-      "Concussion",
-      "Vision loss",
-      "Hearing loss",
-      "Ear problems",
-      "Corrective lenses / contacts",
+    type: [
+      {
+        type: String,
+        enum: [
+          "NA",
+          "Headaches",
+          "Migraines",
+          "Concussion",
+          "Vision loss",
+          "Hearing loss",
+          "Ear problems",
+          "Corrective lenses / contacts",
+        ],
+      },
     ],
   },
+
   digestive: {
-    type: String,
-    enum: [
-      "Constipation",
-      "Irritable bowel syndrome",
-      "Inflammatory bowel disease",
-      "Crohn’s Disease",
-      "Colostomy Bag",
+    type: [
+      {
+        type: String,
+        enum: [
+          "NA",
+          "Constipation",
+          "Irritable bowel syndrome",
+          "Inflammatory bowel disease",
+          "Crohn’s Disease",
+          "Colostomy Bag",
+        ],
+      },
     ],
   },
+  // otherConditions field is an array, and each element in the array is an object.
+  // Each object contains a type property, which is a string. The string value must
+  // be one of the allowed values specified in the enum array, ensuring that the data
+  // stored in the otherConditions field can only be one of the predefined
+  // conditions. For example, when you save data to the otherConditions field,
+  // you can provide an array of strings, and each string should match one of the
+  // allowed values from the enum array.
   otherConditions: {
-    type: String,
-    enum: [
-      "Osteoporosis",
-      "Arthritis",
-      "Fibromyalgia",
-      "Diabetes",
-      "Kidney Disease/Urinary Condition",
-      "Cancer",
-      "HIV",
-      "Nausea",
-      "Plantar Warts",
-      "Hepatitis",
-      "Herpes",
-      "Skin Conditions",
+    type: [
+      {
+        type: String,
+        enum: [
+          "NA",
+          "Osteoporosis",
+          "Arthritis",
+          "Fibromyalgia",
+          "Diabetes",
+          "Kidney Disease/Urinary Condition",
+          "Cancer",
+          "HIV",
+          "Nausea",
+          "Plantar Warts",
+          "Hepatitis",
+          "Herpes",
+          "Skin Conditions",
+        ],
+      },
     ],
   },
   accuracyOfInformation: { type: Date, required: true },
@@ -164,5 +201,6 @@ const BookNowSchema = new Schema({
 // export default User;
 
 // look into the models first, if not there (||), create new one
-const BookNow = models.Client || model("Client", BookNowSchema);
-export default BookNow;
+const BookNowClient =
+  models.BookNowClient || model("BookNowClient", BookNowClientSchema);
+export default BookNowClient;
