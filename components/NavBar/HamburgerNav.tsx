@@ -44,6 +44,11 @@ export default function HamburgerNav() {
               title="Book Now"
               toggle={handleHamburger}
             />
+            <MobileCustomLink
+              href="/adminlogin"
+              title="Admin"
+              toggle={handleHamburger}
+            />
           </nav>
         </MotionDiv>
       ) : null}

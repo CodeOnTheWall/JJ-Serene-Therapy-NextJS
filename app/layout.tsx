@@ -10,6 +10,8 @@ import NavBar from "@/components/NavBar/NavBar";
 // Providers
 import ToasterProvider from "@/providers/ToastProvider";
 import BG from "@/components/BG";
+// Auth Provider
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "JJ Serene Therapy",
@@ -23,17 +25,19 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ToasterProvider />
-        <NavBar />
-        <BG>
-          {children}
-          {/* <HireMe/>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <ToasterProvider />
+          <NavBar />
+          <BG>
+            {children}
+            {/* <HireMe/>
         <Footer/> */}
-        </BG>
-      </body>
-    </html>
+          </BG>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
 

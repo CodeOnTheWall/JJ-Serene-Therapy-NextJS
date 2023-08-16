@@ -74,7 +74,7 @@ export default function ContactForm() {
       });
 
       window.location.href = `mailto:jjserenetherapy@hotmail.com?subject=${values.subject}
-      &body=Hi, my name is ${values.firstName} ${values.lastName}. ${values.message}. I can be reached at ${values.phoneNumber} or ${values.email}`;
+      &body=Hi, my name is ${values.firstName} ${values.lastName}. ${values.message}. I can be reached at ${values.phone} or ${values.email}`;
 
       await fetch("/api/inquiringclient", {
         method: "POST",

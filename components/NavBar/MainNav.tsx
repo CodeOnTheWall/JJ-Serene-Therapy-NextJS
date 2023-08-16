@@ -1,3 +1,6 @@
+// Auth Provider
+import { UserButton } from "@clerk/nextjs";
+
 // Components
 import CustomLink from "./CustomLink";
 
@@ -17,6 +20,7 @@ export default function MainNav({ className, ...props }: MainNavProps) {
       <CustomLink href="/background" title="Background" />
       <CustomLink href="/contact" title="Contact" />
       <CustomLink href="/booknow" title="Book Now" />
+      <CustomLink href="/sign-in" title="Admin" />
     </nav>
   );
 }
