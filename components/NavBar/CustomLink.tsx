@@ -8,12 +8,14 @@ interface CustomLinkProps {
   href: string;
   title: string;
   className?: string;
+  onClick?: () => void;
 }
 
 export default function CustomLink({
   href,
   title,
   className,
+  onClick,
 }: CustomLinkProps) {
   const router = usePathname();
   return (
@@ -30,6 +32,7 @@ export default function CustomLink({
     //   {title}
     // </Link>
     <Link
+      onClick={onClick}
       href={href}
       className={`${className} border-[5px] p-1 font-medium ${
         router === href ? "border-[#7209b7]" : "border-none"

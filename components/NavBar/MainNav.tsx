@@ -1,16 +1,26 @@
-// Auth Provider
-import { UserButton } from "@clerk/nextjs";
+"use client";
 
 // Components
 import CustomLink from "./CustomLink";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 interface MainNavProps {
   className?: string;
-  props?: string;
 }
 
-export default function MainNav({ className, ...props }: MainNavProps) {
-  /* sm above is visible and flex */
+export default function MainNav({ className }: MainNavProps) {
+  const { data: session } = useSession();
+
+  if (session) {
+    return (
+      <>
+        <nav>
+          <button onClick={() => signOut()}>Sign out</button>
+        </nav>
+      </>
+    );
+  }
+
   return (
     <nav
       className={`hidden sm:flex items-center space-x-4 lg:space-x-6 ${className}`}
@@ -20,7 +30,8 @@ export default function MainNav({ className, ...props }: MainNavProps) {
       <CustomLink href="/background" title="Background" />
       <CustomLink href="/contact" title="Contact" />
       <CustomLink href="/booknow" title="Book Now" />
-      <CustomLink href="/sign-in" title="Admin" />
+      <CustomLink href="/admin" title="Admin" />
+      <button onClick={() => signIn()}>Sign in</button>
     </nav>
   );
 }
