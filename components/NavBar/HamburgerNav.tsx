@@ -45,7 +45,7 @@ export default function HamburgerNav() {
               toggle={handleHamburger}
             />
             <MobileCustomLink
-              href="/adminlogin"
+              href="/admin"
               title="Admin"
               toggle={handleHamburger}
             />
