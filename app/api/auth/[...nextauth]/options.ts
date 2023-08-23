@@ -2,6 +2,9 @@ import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+// $ openssl rand -base64 32
+// use above to make next auth secret
+
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({

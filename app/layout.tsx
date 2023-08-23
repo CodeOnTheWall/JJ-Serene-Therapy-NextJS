@@ -10,7 +10,7 @@ import NavBar from "@/components/NavBar/NavBar";
 // Providers
 import ToasterProvider from "@/providers/ToastProvider";
 import BG from "@/components/BG";
-import NextAuthProvider from "@/components/Provider/Provider";
+import NextAuthProvider from "@/providers/NextAuthProvider";
 
 export const metadata: Metadata = {
   title: "JJ Serene Therapy",
@@ -29,11 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <NextAuthProvider>
           <ToasterProvider />
           <NavBar />
-          <BG>
-            {children}
-            {/* <HireMe/>
-        <Footer/> */}
-          </BG>
+          <BG>{children}</BG>
         </NextAuthProvider>
       </body>
     </html>

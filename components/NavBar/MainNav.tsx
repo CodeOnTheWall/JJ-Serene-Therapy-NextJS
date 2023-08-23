@@ -3,6 +3,8 @@ import CustomLink from "./CustomLink";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 // use instead of getSession when calling from the server
 import { getServerSession } from "next-auth/next";
+import { signOut } from "next-auth/react";
+import SignOut from "./SignOut";
 
 interface MainNavProps {
   className?: string;
@@ -12,15 +14,7 @@ export default async function MainNav({ className }: MainNavProps) {
   const session = await getServerSession(options);
 
   if (session) {
-    return (
-      <>
-        <nav
-          className={`hidden sm:flex items-center space-x-4 lg:space-x-6 ${className}`}
-        >
-          <CustomLink href="/api/auth/signout" title="Sign Out" />
-        </nav>
-      </>
-    );
+    return <SignOut />;
   }
 
   return (

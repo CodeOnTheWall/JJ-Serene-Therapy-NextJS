@@ -129,7 +129,7 @@ export async function POST(req: Request) {
     });
 
     await newBookNowClient.save();
-    console.log(newBookNowClient);
+    // console.log(newBookNowClient);
 
     // send json response
     // dont include a status or will throw error
@@ -147,8 +147,11 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
+    await connectToDB();
+
     const BookNowClients = await BookNowClient.find({});
 
+    // returning new NextResponse is only for errors
     if (!BookNowClients) {
       return new NextResponse("No Contact Clients yet", { status: 404 });
     }
