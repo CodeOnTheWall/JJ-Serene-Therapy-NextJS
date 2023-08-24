@@ -11,13 +11,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { InquiringClientColumn } from "./Columns";
+import { BookNowClientColumn } from "./Columns";
 import { Button } from "@/components/ui/button";
-import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import { MoreHorizontal, Trash } from "lucide-react";
 import AlertModal from "@/components/modals/AlertModal";
+import connectToDB from "@/utils/database";
+import BookNowClient from "@/models/booknowclient";
 
 interface CellActionProps {
-  data: InquiringClientColumn;
+  data: BookNowClientColumn;
 }
 
 export default function CellAction({ data }: CellActionProps) {
@@ -26,6 +28,19 @@ export default function CellAction({ data }: CellActionProps) {
 
   const router = useRouter();
   const params = useParams();
+
+  const bookNowClientDB = async () => {
+    try {
+      connectToDB();
+      const bookNowClientRes = await BookNowClient.deleteOne({
+        name: "Eddard Stark",
+      });
+      return bookNowClientRes; // Return the query results
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
 
   const onDelete = async () => {
     try {

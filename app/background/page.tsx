@@ -1,5 +1,4 @@
 // Components
-import AnimatedText from "@/components/AnimatedText";
 import TransitionEffect from "@/components/TransitionEffect";
 import Layout from "@/components/LayoutWrapper";
 import MotionDiv from "@/components/Motion/MotionDiv";
@@ -31,10 +30,10 @@ export default function page() {
             className="bg-[#7209b7] md:w-[2px] md:h-[32px] mr-[15px]"
           />
 
-          <MotionTitle y={-50} duration={1.2} delay={0.6}>
+          <MotionTitle y={-50} duration={1.2} delay={0.6} useAnimate={false}>
             MY
           </MotionTitle>
-          <MotionTitle y={50} duration={1.2} delay={0.6}>
+          <MotionTitle y={50} duration={1.2} delay={0.6} useAnimate={false}>
             BACKGROUND
           </MotionTitle>
           <MotionDiv
@@ -56,6 +55,7 @@ export default function page() {
             delay={0.6}
             duration={1.2}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={false}
           >
             Manual Osteopathic Therapist (MOT)
           </MotionTitle>
@@ -63,6 +63,7 @@ export default function page() {
             delay={0.6}
             duration={1.2}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={false}
           >
             Registered Massage Therapist
           </MotionTitle>
@@ -70,6 +71,7 @@ export default function page() {
             delay={0.6}
             duration={1.2}
             className="!text-2xl !tracking-[10px] !text-black"
+            useAnimate={false}
           >
             BS in Biochemistry
           </MotionTitle>

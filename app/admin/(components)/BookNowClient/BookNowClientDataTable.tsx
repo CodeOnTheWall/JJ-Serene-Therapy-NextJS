@@ -1,23 +1,21 @@
-"use client";
-
 import Heading from "@/components/ui/Heading";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/DataTable";
-import { InquiringClientColumn, Columns } from "./Columns";
+import { BookNowClientColumn, Columns } from "./Columns";
 
-interface InquiringClientDataTableProps {
-  inquiringClientData: InquiringClientColumn[];
+interface BookNowClientDataTableProps {
+  BookNowClientData: BookNowClientColumn[];
 }
 
-export default function InquiringClientDataTable({
-  inquiringClientData,
-}: InquiringClientDataTableProps) {
+export default function BookNowClientDataTable({
+  BookNowClientData,
+}: BookNowClientDataTableProps) {
   return (
     <>
       <div className=" flex items-center justify-between">
         <Heading
-          title="Inquiring Clients"
-          description="View clients who have submitted a contact me form"
+          title="Book Now Clients"
+          description="View clients who have booked an appointment and filled out the Book Now form"
         />
       </div>
       <Separator />
@@ -26,7 +24,7 @@ export default function InquiringClientDataTable({
         // columns from Column Definition in Columns
         columns={Columns}
         // data is data to be seen inside the Columns
-        data={inquiringClientData}
+        data={BookNowClientData}
       />
       <Separator />
     </>

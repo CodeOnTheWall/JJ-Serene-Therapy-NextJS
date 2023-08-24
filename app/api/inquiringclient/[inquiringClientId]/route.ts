@@ -1,9 +1,6 @@
-import { auth } from "@clerk/nextjs";
 // NextResponse.json() method then calls the JSON.stringify() method to
 // convert the JSON data to a JSON string.
 import { NextResponse } from "next/server";
-
-import prismadb from "@/lib/prismadb";
 
 export async function PATCH(
   req: Request,

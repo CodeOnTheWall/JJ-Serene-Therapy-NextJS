@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import CellAction from "./CellAction";
+import CellAction from "./ICCellAction";
 
 // Data table from shadcn
 // this is step 1 Column Definitions
@@ -14,7 +14,7 @@ export type InquiringClientColumn = {
   email: string;
   subject: string;
   message: string;
-  createdAt: string;
+  createdAt: Date;
   id: string;
 };
 

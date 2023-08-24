@@ -1,28 +1,7 @@
 import connectToDB from "@/utils/database";
 import InquiringClient from "@/models/inquiringclient";
 
-import { getServerSession } from "next-auth/next";
-import { options } from "../auth/[...nextauth]/options";
-
 import { NextResponse } from "next/server";
-
-export async function GET(req: Request) {
-  const session = await getServerSession(req, res, options);
-
-  try {
-    await connectToDB();
-
-    const contactClients = await InquiringClient.find({});
-
-    if (!contactClients) {
-      return new NextResponse("No Contact Clients yet", { status: 404 });
-    }
-
-    return NextResponse.json(contactClients);
-  } catch (error) {
-    return new NextResponse("Internal Error", { status: 500 });
-  }
-}
 
 export async function POST(req: Request) {
   try {
