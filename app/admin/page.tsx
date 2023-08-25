@@ -29,7 +29,6 @@ const bookNowClientDB = async () => {
   try {
     connectToDB();
     const bookNowClientRes = await BookNowClient.find({});
-    console.log(bookNowClientRes);
     return bookNowClientRes; // Return the query results
   } catch (error) {
     console.error(error);
@@ -61,7 +60,7 @@ export default async function Home() {
     email: string;
     subject: string;
     message: string;
-    createdAt: Date;
+    createdAt: string;
   }
   interface BookNowClient {
     _id: string;
@@ -72,7 +71,7 @@ export default async function Home() {
     address: string;
     sex: string;
     gender: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     personalHealthNumber: string;
     guardian: string;
     emergencyContact: string;
@@ -99,18 +98,18 @@ export default async function Home() {
     headNeck: string[];
     digestive: string[];
     otherConditions: string[];
-    accuracyOfInformation: Date;
-    privacyAndSharingOfInformation: Date;
-    cancellationPolicy: Date;
-    lateArrivalPolicy: Date;
-    inappropriateBehaviourPolicy: Date;
-    treatmentConsentStatement: Date;
-    minorConsent: Date;
-    paymentPolicy: Date;
-    communicationConsent: Date;
+    accuracyOfInformation: string;
+    privacyAndSharingOfInformation: string;
+    cancellationPolicy: string;
+    lateArrivalPolicy: string;
+    inappropriateBehaviourPolicy: string;
+    treatmentConsentStatement: string;
+    minorConsent: string;
+    paymentPolicy: string;
+    communicationConsent: string;
     signature: string;
-    updatedAt: Date;
-    createdAt: Date;
+    updatedAt: string;
+    createdAt: string;
   }
 
   const formattedInquiringClient = inquiringClientRes.map(
@@ -122,7 +121,9 @@ export default async function Home() {
       email: inquiringClient.email,
       subject: inquiringClient.subject,
       message: inquiringClient.message,
-      createdAt: inquiringClient.createdAt,
+      createdAt: new Date(inquiringClient.createdAt).toLocaleDateString(
+        "en-US"
+      ),
     })
   );
 
@@ -136,7 +137,9 @@ export default async function Home() {
       address: bookNowClient.address,
       sex: bookNowClient.sex,
       gender: bookNowClient.gender,
-      dateOfBirth: bookNowClient.dateOfBirth,
+      dateOfBirth: new Date(bookNowClient.dateOfBirth).toLocaleDateString(
+        "en-us"
+      ),
       personalHealthNumber: bookNowClient.personalHealthNumber,
       guardian: bookNowClient.guardian,
       emergencyContact: bookNowClient.emergencyContact,
@@ -164,19 +167,36 @@ export default async function Home() {
       headNeck: bookNowClient.headNeck,
       digestive: bookNowClient.digestive,
       otherConditions: bookNowClient.otherConditions,
-      accuracyOfInformation: bookNowClient.accuracyOfInformation,
-      privacyAndSharingOfInformation:
-        bookNowClient.privacyAndSharingOfInformation,
-      cancellationPolicy: bookNowClient.cancellationPolicy,
-      lateArrivalPolicy: bookNowClient.lateArrivalPolicy,
-      inappropriateBehaviourPolicy: bookNowClient.inappropriateBehaviourPolicy,
-      treatmentConsentStatement: bookNowClient.treatmentConsentStatement,
-      minorConsent: bookNowClient.minorConsent,
-      paymentPolicy: bookNowClient.paymentPolicy,
-      communicationConsent: bookNowClient.communicationConsent,
+      accuracyOfInformation: new Date(
+        bookNowClient.accuracyOfInformation
+      ).toLocaleDateString("en-US"),
+      privacyAndSharingOfInformation: new Date(
+        bookNowClient.privacyAndSharingOfInformation
+      ).toLocaleDateString("en-US"),
+      cancellationPolicy: new Date(
+        bookNowClient.cancellationPolicy
+      ).toLocaleDateString("en-US"),
+      lateArrivalPolicy: new Date(
+        bookNowClient.lateArrivalPolicy
+      ).toLocaleDateString("en-US"),
+      inappropriateBehaviourPolicy: new Date(
+        bookNowClient.inappropriateBehaviourPolicy
+      ).toLocaleDateString("en-US"),
+      treatmentConsentStatement: new Date(
+        bookNowClient.treatmentConsentStatement
+      ).toLocaleDateString("en-US"),
+      minorConsent: new Date(bookNowClient.minorConsent).toLocaleDateString(
+        "en-US"
+      ),
+      paymentPolicy: new Date(bookNowClient.paymentPolicy).toLocaleDateString(
+        "en-US"
+      ),
+      communicationConsent: new Date(
+        bookNowClient.communicationConsent
+      ).toLocaleDateString("en-US"),
       signature: bookNowClient.signature,
-      updatedAt: bookNowClient.updatedAt,
-      createdAt: bookNowClient.createdAt,
+      updatedAt: new Date(bookNowClient.updatedAt).toLocaleDateString("en-US"),
+      createdAt: new Date(bookNowClient.createdAt).toLocaleDateString("en-US"),
     })
   );
 

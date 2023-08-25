@@ -13,10 +13,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { BookNowClientColumn } from "./Columns";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Trash } from "lucide-react";
+import { MoreHorizontal, Trash, Edit } from "lucide-react";
 import AlertModal from "@/components/modals/AlertModal";
-import connectToDB from "@/utils/database";
-import BookNowClient from "@/models/booknowclient";
 
 interface CellActionProps {
   data: BookNowClientColumn;
@@ -28,19 +26,6 @@ export default function CellAction({ data }: CellActionProps) {
 
   const router = useRouter();
   const params = useParams();
-
-  const bookNowClientDB = async () => {
-    try {
-      connectToDB();
-      const bookNowClientRes = await BookNowClient.deleteOne({
-        name: "Eddard Stark",
-      });
-      return bookNowClientRes; // Return the query results
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
 
   const onDelete = async () => {
     try {
@@ -76,6 +61,14 @@ export default function CellAction({ data }: CellActionProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem
+            // we have the id since the passed in data gets the id automatically
+            // from the row
+            onClick={() => router.push(`/booknow/${data.id}`)}
+          >
+            <Edit className=" mr-2 h-4 w-4" />
+            Update
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setIsOpen(true)}>
             <Trash className=" mr-2 h-4 w-4" />
             Delete

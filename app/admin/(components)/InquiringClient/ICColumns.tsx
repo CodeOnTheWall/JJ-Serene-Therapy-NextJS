@@ -14,7 +14,7 @@ export type InquiringClientColumn = {
   email: string;
   subject: string;
   message: string;
-  createdAt: Date;
+  createdAt: string;
   id: string;
 };
 

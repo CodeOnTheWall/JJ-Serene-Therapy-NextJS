@@ -8,15 +8,15 @@ import CellAction from "./CellAction";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type BookNowClientColumn = {
-  id: string;
   firstName: string;
   lastName: string;
   email: string;
+  id: string;
   phone: string;
   address: string;
   sex: string;
   gender: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   personalHealthNumber: string;
   guardian: string;
   emergencyContact: string;
@@ -43,23 +43,36 @@ export type BookNowClientColumn = {
   headNeck: string[];
   digestive: string[];
   otherConditions: string[];
-  accuracyOfInformation: Date;
-  privacyAndSharingOfInformation: Date;
-  cancellationPolicy: Date;
-  lateArrivalPolicy: Date;
-  inappropriateBehaviourPolicy: Date;
-  treatmentConsentStatement: Date;
-  minorConsent: Date;
-  paymentPolicy: Date;
-  communicationConsent: Date;
+  accuracyOfInformation: string;
+  privacyAndSharingOfInformation: string;
+  cancellationPolicy: string;
+  lateArrivalPolicy: string;
+  inappropriateBehaviourPolicy: string;
+  treatmentConsentStatement: string;
+  minorConsent: string;
+  paymentPolicy: string;
+  communicationConsent: string;
   signature: string;
-  createdAt: Date;
-  updatedAt: Date;
+  updatedAt: string;
+  createdAt: string;
 };
 
 // header is what is shown
 export const Columns: ColumnDef<BookNowClientColumn>[] = [
   {
+    id: "actions",
+    // row represents a row of data in the data table, and row.original
+    // provides access to the original data object associated with
+    // that row. These properties are used in the code to pass the
+    // row's original data to the CellAction component for further
+    // processing or rendering.
+    // the original data object is the BillboardColumn type
+    cell: ({ row }) => <CellAction data={row.original} />,
+  },
+  {
+    // accessorKeys correspond to the key in the data object (inquiringClientData)
+    // that contains the value for that column
+    // hence firstName etc are types of the inquiringClientData
     accessorKey: "firstName",
     header: "First Name",
   },
@@ -125,39 +138,39 @@ export const Columns: ColumnDef<BookNowClientColumn>[] = [
   },
   {
     accessorKey: "howDidYouHearAboutUs",
-    header: "How Did You Hear About Us",
+    header: "How did you hear about us?",
   },
   {
     accessorKey: "referredTo",
-    header: "Referred To",
+    header: "Referred to",
   },
   {
     accessorKey: "healthConcerns",
-    header: "Health Concerns",
+    header: "Health concerns",
   },
   {
     accessorKey: "whatIsMakingItBetter",
-    header: "What Is Making It Better",
+    header: "What is making it better?",
   },
   {
     accessorKey: "whatIsMakingItWorse",
-    header: "What Is Making It Worse",
+    header: "What is making it worse?",
   },
   {
     accessorKey: "currentMedications",
-    header: "Current Medications",
+    header: "Current medications",
   },
   {
     accessorKey: "knownAllergiesOrHypersensitivities",
-    header: "Known Allergies or Hypersensitivities",
+    header: "Known allergies or hypersensitivities",
   },
   {
     accessorKey: "majorAccidentsOrSurgeries",
-    header: "Major Accidents or Surgeries",
+    header: "Major accidents or surgeries",
   },
   {
     accessorKey: "familyHistory",
-    header: "Family History",
+    header: "Family history",
   },
   {
     accessorKey: "activitiesSportsHobbies",
@@ -165,11 +178,11 @@ export const Columns: ColumnDef<BookNowClientColumn>[] = [
   },
   {
     accessorKey: "treatmentExpectation",
-    header: "Treatment Expectation",
+    header: "Treatment expectation",
   },
   {
     accessorKey: "otherTherapyTreatment",
-    header: "Other Therapy Treatment",
+    header: "Other therapy treatment",
   },
   {
     accessorKey: "cardiovascular",
@@ -185,7 +198,7 @@ export const Columns: ColumnDef<BookNowClientColumn>[] = [
   },
   {
     accessorKey: "headNeck",
-    header: "Head/Neck",
+    header: "HeadNeck",
   },
   {
     accessorKey: "digestive",
@@ -193,43 +206,43 @@ export const Columns: ColumnDef<BookNowClientColumn>[] = [
   },
   {
     accessorKey: "otherConditions",
-    header: "Other Conditions",
+    header: "Other conditions",
   },
   {
     accessorKey: "accuracyOfInformation",
-    header: "Accuracy of Information",
+    header: "Accuracy of information",
   },
   {
     accessorKey: "privacyAndSharingOfInformation",
-    header: "Privacy and Sharing of Information",
+    header: "Privacy and sharing of information",
   },
   {
     accessorKey: "cancellationPolicy",
-    header: "Cancellation Policy",
+    header: "Cancellation policy",
   },
   {
     accessorKey: "lateArrivalPolicy",
-    header: "Late Arrival Policy",
+    header: "Late arrival policy",
   },
   {
     accessorKey: "inappropriateBehaviourPolicy",
-    header: "Inappropriate Behaviour Policy",
+    header: "Inappropriate behaviour policy",
   },
   {
     accessorKey: "treatmentConsentStatement",
-    header: "Treatment Consent Statement",
+    header: "Treatment consent statement",
   },
   {
     accessorKey: "minorConsent",
-    header: "Minor Consent",
+    header: "Minor consent",
   },
   {
     accessorKey: "paymentPolicy",
-    header: "Payment Policy",
+    header: "Payment policy",
   },
   {
     accessorKey: "communicationConsent",
-    header: "Communication Consent",
+    header: "Communication consent",
   },
   {
     accessorKey: "signature",
@@ -237,14 +250,10 @@ export const Columns: ColumnDef<BookNowClientColumn>[] = [
   },
   {
     accessorKey: "updatedAt",
-    header: "Updated At",
+    header: "Updated at",
   },
   {
     accessorKey: "createdAt",
-    header: "Created At",
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />,
+    header: "Created at",
   },
 ];

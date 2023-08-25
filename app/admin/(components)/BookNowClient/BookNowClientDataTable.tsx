@@ -3,19 +3,19 @@ import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/DataTable";
 import { BookNowClientColumn, Columns } from "./Columns";
 
-interface BookNowClientDataTableProps {
+interface BookNowDataTableProps {
   BookNowClientData: BookNowClientColumn[];
 }
 
 export default function BookNowClientDataTable({
   BookNowClientData,
-}: BookNowClientDataTableProps) {
+}: BookNowDataTableProps) {
   return (
     <>
       <div className=" flex items-center justify-between">
         <Heading
-          title="Book Now Clients"
-          description="View clients who have booked an appointment and filled out the Book Now form"
+          title="Clients who have booked"
+          description="View clients who have submitted a book now form"
         />
       </div>
       <Separator />

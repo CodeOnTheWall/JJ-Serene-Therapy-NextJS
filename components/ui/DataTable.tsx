@@ -63,7 +63,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
+    <div className=" w-full">
       {/* filtering */}
       <div className="flex items-center py-4">
         <Input
