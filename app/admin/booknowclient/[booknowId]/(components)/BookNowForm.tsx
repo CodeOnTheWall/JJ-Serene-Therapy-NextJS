@@ -505,12 +505,11 @@ interface BookNowClientProps {
   firstName: string;
   lastName: string;
   email: string;
-  id: string;
   phone: string;
   address: string;
   sex: string;
   gender: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   personalHealthNumber: string;
   guardian: string;
   emergencyContact: string;
@@ -537,18 +536,18 @@ interface BookNowClientProps {
   headNeck: string[];
   digestive: string[];
   otherConditions: string[];
-  accuracyOfInformation: string;
-  privacyAndSharingOfInformation: string;
-  cancellationPolicy: string;
-  lateArrivalPolicy: string;
-  inappropriateBehaviourPolicy: string;
-  treatmentConsentStatement: string;
-  minorConsent: string;
-  paymentPolicy: string;
-  communicationConsent: string;
+  accuracyOfInformation: Date;
+  privacyAndSharingOfInformation: Date;
+  cancellationPolicy: Date;
+  lateArrivalPolicy: Date;
+  inappropriateBehaviourPolicy: Date;
+  treatmentConsentStatement: Date;
+  minorConsent: Date;
+  paymentPolicy: Date;
+  communicationConsent: Date;
   signature: string;
-  updatedAt: string;
-  createdAt: string;
+  updatedAt: Date;
+  createdAt: Date;
 }
 
 interface BookNowClientFormProps {
@@ -568,7 +567,54 @@ export default function BookNowForm({ bookNowClient }: BookNowClientFormProps) {
     // resolver function from react-hook-lib allows integration with
     // external validation libs like zod
     resolver: zodResolver(bookNowFormSchema),
-    defaultValues: bookNowClient,
+    defaultValues: {
+      firstName: bookNowClient.firstName,
+      lastName: bookNowClient.lastName,
+      email: bookNowClient.email,
+      phone: bookNowClient.phone,
+      address: bookNowClient.address,
+      sex: bookNowClient.sex,
+      gender: bookNowClient.gender,
+      dateOfBirth: bookNowClient.dateOfBirth,
+      personalHealthNumber: bookNowClient.personalHealthNumber,
+      guardian: bookNowClient.guardian,
+      emergencyContact: bookNowClient.emergencyContact,
+      emergencyContactPhone: bookNowClient.emergencyContactPhone,
+      occupation: bookNowClient.occupation,
+      employer: bookNowClient.employer,
+      familyDoctor: bookNowClient.familyDoctor,
+      referringProfessional: bookNowClient.referringProfessional,
+      howDidYouHearAboutUs: bookNowClient.howDidYouHearAboutUs,
+      referredTo: bookNowClient.referredTo,
+      healthConcerns: bookNowClient.healthConcerns,
+      whatIsMakingItBetter: bookNowClient.whatIsMakingItBetter,
+      whatIsMakingItWorse: bookNowClient.whatIsMakingItWorse,
+      currentMedications: bookNowClient.currentMedications,
+      knownAllergiesOrHypersensitivities:
+        bookNowClient.knownAllergiesOrHypersensitivities,
+      majorAccidentsOrSurgeries: bookNowClient.majorAccidentsOrSurgeries,
+      familyHistory: bookNowClient.familyHistory,
+      activitiesSportsHobbies: bookNowClient.activitiesSportsHobbies,
+      treatmentExpectation: bookNowClient.treatmentExpectation,
+      otherTherapyTreatment: bookNowClient.otherTherapyTreatment,
+      cardiovascular: bookNowClient.cardiovascular,
+      respiratory: bookNowClient.respiratory,
+      neurological: bookNowClient.neurological,
+      headNeck: bookNowClient.headNeck,
+      digestive: bookNowClient.digestive,
+      otherConditions: bookNowClient.otherConditions,
+      accuracyOfInformation: bookNowClient.accuracyOfInformation,
+      privacyAndSharingOfInformation:
+        bookNowClient.privacyAndSharingOfInformation,
+      cancellationPolicy: bookNowClient.cancellationPolicy,
+      lateArrivalPolicy: bookNowClient.lateArrivalPolicy,
+      inappropriateBehaviourPolicy: bookNowClient.inappropriateBehaviourPolicy,
+      treatmentConsentStatement: bookNowClient.treatmentConsentStatement,
+      minorConsent: bookNowClient.minorConsent,
+      paymentPolicy: bookNowClient.paymentPolicy,
+      communicationConsent: bookNowClient.communicationConsent,
+      signature: bookNowClient.signature,
+    },
   });
 
   // 2. Define Submit Handler

@@ -1,6 +1,5 @@
-import BillBoardForm from "./components/BillboardForm";
 import BookNowClient from "@/models/booknowclient";
-import BookNowForm from "./components/BookNowForm";
+import BookNowForm from "./(components)/BookNowForm";
 
 interface BookNowClientFormPageProps {
   params: {
@@ -20,7 +19,7 @@ interface BookNowClient {
   address: string;
   sex: string;
   gender: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   personalHealthNumber: string;
   guardian: string;
   emergencyContact: string;
@@ -47,18 +46,18 @@ interface BookNowClient {
   headNeck: string[];
   digestive: string[];
   otherConditions: string[];
-  accuracyOfInformation: string;
-  privacyAndSharingOfInformation: string;
-  cancellationPolicy: string;
-  lateArrivalPolicy: string;
-  inappropriateBehaviourPolicy: string;
-  treatmentConsentStatement: string;
-  minorConsent: string;
-  paymentPolicy: string;
-  communicationConsent: string;
+  accuracyOfInformation: Date;
+  privacyAndSharingOfInformation: Date;
+  cancellationPolicy: Date;
+  lateArrivalPolicy: Date;
+  inappropriateBehaviourPolicy: Date;
+  treatmentConsentStatement: Date;
+  minorConsent: Date;
+  paymentPolicy: Date;
+  communicationConsent: Date;
   signature: string;
-  updatedAt: string;
-  createdAt: string;
+  updatedAt: Date;
+  createdAt: Date;
 }
 
 export default async function BookNowClientFormPage({

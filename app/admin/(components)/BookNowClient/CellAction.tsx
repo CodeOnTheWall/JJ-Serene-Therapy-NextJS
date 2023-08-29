@@ -63,7 +63,7 @@ export default function CellAction({ data }: CellActionProps) {
           <DropdownMenuItem
             // we have the id since the passed in data gets the id automatically
             // from the row
-            onClick={() => router.push(`/booknow/${data.id}`)}
+            onClick={() => router.push(`/admin/booknowclient/${data.id}`)}
           >
             <Edit className=" mr-2 h-4 w-4" />
             Update

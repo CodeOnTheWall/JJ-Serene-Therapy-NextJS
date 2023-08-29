@@ -1,6 +1,8 @@
 import connectToDB from "@/utils/database";
 import BookNowClient from "@/models/booknowclient";
 
+// this is the Response to use when using in conjunction with typescript
+// instead of Response.json
 import { NextResponse } from "next/server";
 
 export async function DELETE(
@@ -125,7 +127,6 @@ export async function PATCH(
       params.id,
       { $set: updatedFields }
     );
-    console.log(updatedBookNowClient);
 
     return NextResponse.json(updatedBookNowClient);
   } catch (error) {
