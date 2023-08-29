@@ -12,8 +12,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import BookNowClient from "@/models/booknowclient";
-
 // all dl from shadcn, including react-hook-form as its built into shadcns form
 import {
   Form,
@@ -42,6 +40,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const cardiovascular = [
   {
@@ -560,6 +559,8 @@ export default function BookNowForm({ bookNowClient }: BookNowClientFormProps) {
   // to disable inputs during loading/submitting states
   const [isloading, setIsLoading] = useState(false);
 
+  const params = useParams();
+
   // 1. Define Form
   // methods on form i.e. form.handleSubmit are from the react-hook-form lib
   // all this is directly from shadcn form docs
@@ -574,10 +575,10 @@ export default function BookNowForm({ bookNowClient }: BookNowClientFormProps) {
   const onSubmit = async (values: BookNowFormSchema) => {
     try {
       setIsLoading(true);
-      toast.success("loading scheduling calendar...");
+      toast.success("updating client information...");
 
-      await fetch("/api/booknowclient", {
-        method: "POST",
+      await fetch(`/api/booknowclient/${params.booknowId}`, {
+        method: "PATCH",
         body: JSON.stringify({
           firstName: values.firstName,
           lastName: values.lastName,

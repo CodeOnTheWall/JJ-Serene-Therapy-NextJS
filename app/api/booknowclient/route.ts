@@ -3,6 +3,23 @@ import BookNowClient from "@/models/booknowclient";
 
 import { NextResponse } from "next/server";
 
+export async function GET(req: Request) {
+  try {
+    await connectToDB();
+
+    const BookNowClients = await BookNowClient.find({});
+
+    // returning new NextResponse is only for errors
+    if (!BookNowClients) {
+      return new NextResponse("No Contact Clients yet", { status: 404 });
+    }
+
+    return NextResponse.json(BookNowClients);
+  } catch (error) {
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
+
 export async function POST(req: Request) {
   try {
     // req.json parses the JSON to JS
@@ -127,6 +144,7 @@ export async function POST(req: Request) {
       communicationConsent,
       signature,
     });
+    console.log(newBookNowClient);
 
     await newBookNowClient.save();
     // console.log(newBookNowClient);
@@ -142,22 +160,5 @@ export async function POST(req: Request) {
     return new NextResponse("Failed to create a new Contact Client", {
       status: 500,
     });
-  }
-}
-
-export async function GET(req: Request) {
-  try {
-    await connectToDB();
-
-    const BookNowClients = await BookNowClient.find({});
-
-    // returning new NextResponse is only for errors
-    if (!BookNowClients) {
-      return new NextResponse("No Contact Clients yet", { status: 404 });
-    }
-
-    return NextResponse.json(BookNowClients);
-  } catch (error) {
-    return new NextResponse("Internal Error", { status: 500 });
   }
 }
