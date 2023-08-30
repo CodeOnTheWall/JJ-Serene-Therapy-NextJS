@@ -32,13 +32,13 @@ export default function page() {
             useAnimate={false}
             className="bg-[#7209b7] md:w-[2px] md:h-[32px] mr-[15px]"
           />
-          <MotionTitle y={-50} duration={1.2} delay={0.6}>
+          <MotionTitle y={-50} duration={1.2} delay={0.6} useAnimate={false}>
             JJ
           </MotionTitle>
-          <MotionTitle y={50} duration={1.2} delay={0.6}>
+          <MotionTitle y={-50} duration={1.2} delay={0.6} useAnimate={false}>
             SERENE
           </MotionTitle>
-          <MotionTitle y={-50} duration={1.2} delay={0.6}>
+          <MotionTitle y={-50} duration={1.2} delay={0.6} useAnimate={false}>
             THERAPY
           </MotionTitle>
           <MotionDiv
