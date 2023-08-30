@@ -9,7 +9,7 @@ interface MotionTitleProps extends MotionProps {
   delay: number;
   className?: string;
   children: string;
-  useAnimate: boolean;
+  useAnimate?: boolean;
 }
 
 export default function MotionTitle({
