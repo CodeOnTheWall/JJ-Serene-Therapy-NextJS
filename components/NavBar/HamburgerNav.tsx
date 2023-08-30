@@ -6,7 +6,6 @@ import MotionDiv from "../MotionDivTwo";
 import MobileCustomLink from "./MobileCustomLink";
 
 export default function HamburgerNav() {
-  const onOpen = useHamburgerState((state) => state.onOpen);
   const onClose = useHamburgerState((state) => state.onClose);
   const isOpen = useHamburgerState((state) => state.isOpen);
 
@@ -16,7 +15,7 @@ export default function HamburgerNav() {
 
   return (
     <>
-      {isOpen ? (
+      {isOpen && (
         <MotionDiv
           initial={{ scale: 0, opacity: 0, x: "-50%", y: "-50%" }}
           animate={{ scale: 1, opacity: 1 }}
@@ -51,7 +50,7 @@ export default function HamburgerNav() {
             />
           </nav>
         </MotionDiv>
-      ) : null}
+      )}
     </>
   );
 }

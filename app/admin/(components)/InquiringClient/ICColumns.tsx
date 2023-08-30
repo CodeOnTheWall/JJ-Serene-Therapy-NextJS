@@ -21,6 +21,16 @@ export type InquiringClientColumn = {
 // header is what is shown
 export const Columns: ColumnDef<InquiringClientColumn>[] = [
   {
+    id: "actions",
+    // row represents a row of data in the data table, and row.original
+    // provides access to the original data object associated with
+    // that row. These properties are used in the code to pass the
+    // row's original data to the CellAction component for further
+    // processing or rendering.
+    // the original data object is the BillboardColumn type
+    cell: ({ row }) => <CellAction data={row.original} />,
+  },
+  {
     // accessorKeys correspond to the key in the data object (inquiringClientData)
     // that contains the value for that column
     // hence firstName etc are types of the inquiringClientData
@@ -50,15 +60,5 @@ export const Columns: ColumnDef<InquiringClientColumn>[] = [
   {
     accessorKey: "createdAt",
     header: "When Client Submitted Form",
-  },
-  {
-    id: "actions",
-    // row represents a row of data in the data table, and row.original
-    // provides access to the original data object associated with
-    // that row. These properties are used in the code to pass the
-    // row's original data to the CellAction component for further
-    // processing or rendering.
-    // the original data object is the BillboardColumn type
-    cell: ({ row }) => <CellAction data={row.original} />,
   },
 ];

@@ -69,6 +69,7 @@ export default async function BookNowClientFormPage({
 
   const bookNowClient = {
     id: bookNowClientRes._id.toString(),
+    appointmentNotes: bookNowClientRes.appointmentNotes,
     firstName: bookNowClientRes.firstName,
     lastName: bookNowClientRes.lastName,
     email: bookNowClientRes.email,

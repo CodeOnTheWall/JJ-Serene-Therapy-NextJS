@@ -1,5 +1,4 @@
 import type { NextAuthOptions } from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 // $ openssl rand -base64 32
@@ -27,8 +26,8 @@ export const options: NextAuthOptions = {
         // Docs: https://next-auth.js.org/configuration/providers/credentials
         const user = {
           id: "1",
-          name: "j",
-          password: "j",
+          name: "Jason",
+          password: "loMejorOsteopath",
         };
 
         if (

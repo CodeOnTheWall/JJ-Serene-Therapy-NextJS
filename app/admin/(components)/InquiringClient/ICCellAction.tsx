@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 
 import {
@@ -25,12 +25,11 @@ export default function CellAction({ data }: CellActionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
-  const params = useParams();
 
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await fetch(`/api/inquiringClient/${params.inquiringClientId}/`, {
+      await fetch(`/api/inquiringclient/${data.id}/`, {
         method: "DELETE",
       });
       router.refresh();

@@ -298,6 +298,12 @@ const otherConditions = [
 
 // zod schemas
 const bookNowFormSchema = z.object({
+  // appointmentNotes: z.string().min(2, {
+  //   message: "Appointment Notes",
+  // }),
+  appointmentNotes: z.string().min(1, {
+    message: "At least one appointment note is required",
+  }),
   // must have name property that is a string with a min length of 1 char
   // if not this, the FormMessage is auto updated to reflect the zod validation
   firstName: z.string().min(1, {
@@ -502,6 +508,7 @@ const bookNowFormSchema = z.object({
 type BookNowFormSchema = z.infer<typeof bookNowFormSchema>;
 
 interface BookNowClientProps {
+  appointmentNotes: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -568,6 +575,7 @@ export default function BookNowForm({ bookNowClient }: BookNowClientFormProps) {
     // external validation libs like zod
     resolver: zodResolver(bookNowFormSchema),
     defaultValues: {
+      appointmentNotes: bookNowClient.appointmentNotes,
       firstName: bookNowClient.firstName,
       lastName: bookNowClient.lastName,
       email: bookNowClient.email,
@@ -626,6 +634,7 @@ export default function BookNowForm({ bookNowClient }: BookNowClientFormProps) {
       await fetch(`/api/booknowclient/${params.booknowId}`, {
         method: "PATCH",
         body: JSON.stringify({
+          appointmentNotes: values.appointmentNotes,
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
@@ -673,6 +682,12 @@ export default function BookNowForm({ bookNowClient }: BookNowClientFormProps) {
           signature: values.signature,
         }),
       });
+      // await fetch(`/api/booknowclient/${params.booknowId}`, {
+      //   method: "PUT",
+      //   body: JSON.stringify({
+      //     appointmentNotes: values.appointmentNotes,
+      //   }),
+      // });
     } catch (error) {
       console.log("here", error);
       toast.error(`Something went wrong, error: ${error}`);
@@ -686,13 +701,42 @@ export default function BookNowForm({ bookNowClient }: BookNowClientFormProps) {
       <Button>
         <Link href="/admin">Back to Dashboard</Link>
       </Button>
+
       <div className="flex flex-col items-center space-y-10">
         <p>Edit Client information, and add notes</p>
+
         <Form {...bookNowForm}>
           <form
             onSubmit={bookNowForm.handleSubmit(onSubmit)}
             className=" space-y-2 w-full md:w-1/2"
           >
+            {/* disable buttons if loading */}
+            <div className=" flex justify-center mb-4">
+              <Button disabled={isloading} type="submit">
+                Update Client Information/Save Notes
+              </Button>
+            </div>
+            <FormField
+              control={bookNowForm.control}
+              name="appointmentNotes"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Appointment Notes</FormLabel>
+                  <FormDescription>
+                    Include date and always type newest Appointment Notes at top
+                  </FormDescription>
+                  <FormMessage />
+                  <FormControl>
+                    <Textarea
+                      placeholder="2023-08-30 Assessed clients shoulder... 
+                      2023-09-12 Re Assessed client shoulder"
+                      className=""
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
             <FormField
               control={bookNowForm.control}
               name="firstName"
@@ -2036,12 +2080,6 @@ export default function BookNowForm({ bookNowClient }: BookNowClientFormProps) {
                 </FormItem>
               )}
             />
-            {/* disable buttons if loading */}
-            <div className=" flex justify-center !mt-4">
-              <Button disabled={isloading} type="submit">
-                Update Client Information/Save Notes
-              </Button>
-            </div>
           </form>
         </Form>
       </div>

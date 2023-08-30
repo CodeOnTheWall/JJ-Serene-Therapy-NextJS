@@ -27,6 +27,7 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   const {
+    appointmentNotes,
     firstName,
     lastName,
     email,
@@ -74,6 +75,7 @@ export async function PATCH(
   } = await req.json();
 
   const updatedFields = {
+    appointmentNotes,
     firstName,
     lastName,
     email,
@@ -134,3 +136,28 @@ export async function PATCH(
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+// export async function PUT(
+//   req: Request,
+//   { params }: { params: { id: string } }
+// ) {
+//   const { appointmentNotes } = await req.json();
+
+//   const updatedFields = {
+//     appointmentNotes,
+//   };
+
+//   try {
+//     connectToDB();
+
+//     const updatedBookNowClient = await BookNowClient.findByIdAndUpdate(
+//       params.id,
+//       { appointmentNotes: appointmentNotes }
+//     );
+//     console.log(updatedBookNowClient);
+
+//     return NextResponse.json(updatedBookNowClient);
+//   } catch (error) {
+//     console.log("[BOOKNOWCLIENT_PATCH]", error);
+//     return new NextResponse("Internal Error", { status: 500 });
+//   }
+// }

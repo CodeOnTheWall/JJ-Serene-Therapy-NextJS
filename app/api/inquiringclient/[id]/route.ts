@@ -1,5 +1,5 @@
 import connectToDB from "@/utils/database";
-import BookNowClient from "@/models/booknowclient";
+import InquiringClient from "@/models/inquiringclient";
 
 import { NextResponse } from "next/server";
 
@@ -10,11 +10,11 @@ export async function DELETE(
   try {
     connectToDB();
 
-    const deletedBookNowClient = await BookNowClient.findByIdAndDelete(
+    const deletedInquiringClient = await InquiringClient.findByIdAndDelete(
       params.id
     );
 
-    return NextResponse.json(deletedBookNowClient);
+    return NextResponse.json(deletedInquiringClient);
   } catch (error) {
     console.log("[INQURINGCLIENT_DELETE]", error);
     return new NextResponse("Internal Error", { status: 500 });
