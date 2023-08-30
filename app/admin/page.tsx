@@ -41,13 +41,10 @@ export default async function Home() {
 
   // after login, the callback url would go back to /admin
   if (!session) {
-    redirect("/api/auth/signin?callbackUrl=/admin");
+    redirect(
+      "/api/auth/signin?callbackUrl=/https://jj-serene-therapy-next-uuvvyh12r-codeonthewall.vercel.app/admin"
+    );
   }
-
-  //   const test = await fetch("http://localhost:3000/api/booknowclient", {
-  //     method: "GET",
-  //   });
-  //   const bookNowClientRes = await test.json();
 
   const inquiringClientRes = await inquiringClientDB();
   const bookNowClientRes = await bookNowClientDB();

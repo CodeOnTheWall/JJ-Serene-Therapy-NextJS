@@ -13,7 +13,12 @@ export default function SignOut({ className }: SignOutProps) {
     >
       <button
         className="be"
-        onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}
+        onClick={() =>
+          signOut({
+            callbackUrl:
+              "https://jj-serene-therapy-next-uuvvyh12r-codeonthewall.vercel.app/",
+          })
+        }
       >
         Sign Out
       </button>
